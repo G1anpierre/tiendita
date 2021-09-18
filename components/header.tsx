@@ -1,13 +1,22 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
 import Image from 'next/image'
 import {AppContext} from '../pages/index'
+import {DrawerProps} from 'antd/es/drawer'
+import DrawerContainer from '../components/drawer-container'
 
-const Header = () => {
-  const appContext = React.useContext(AppContext)
+const Header: React.FC = () => {
+  const appContext = useContext(AppContext)
+  const [drawerIsOpen, setDrawerIsOpen] = useState(false)
+  const [size, setSize] = useState<DrawerProps['size']>()
 
   const {
     state: {cart},
   } = appContext
+
+  const handleOpenDrawer = () => {
+    setSize('large')
+    setDrawerIsOpen(!drawerIsOpen)
+  }
 
   return (
     <>
@@ -15,7 +24,7 @@ const Header = () => {
         <nav className="navbar">
           <div className="logo">Tiendita</div>
           <div className="place">Mexico City Reforma</div>
-          <div className="cart-info">
+          <div className="cart-info" onClick={handleOpenDrawer}>
             <span className="cart-info__icon">
               <Image
                 src="/images/shopping-cart.svg"
@@ -31,6 +40,14 @@ const Header = () => {
           !Adquiere todos tus productos favoritos al mejor precio!
         </div>
       </header>
+      <DrawerContainer
+        drawerIsOpen={drawerIsOpen}
+        handleOpenDrawer={handleOpenDrawer}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </DrawerContainer>
       <style jsx>{`
         .navbar {
           display: grid;

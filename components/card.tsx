@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({product}) => {
     })
   }
 
-  const handleAddProduct = (product, callback) => {
+  const handleAddProduct = (product: ProductType, callback: () => void) => {
     appContext.dispatch({type: 'addProduct', payload: product})
     callback()
   }
