@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import {ProductType} from '../pages/index'
 import {AppContext} from '../pages/index'
+import {notification} from 'antd'
 
 export type CardProps = {
   product: ProductType
@@ -10,8 +11,15 @@ export type CardProps = {
 const Card: React.FC<CardProps> = ({product}) => {
   const appContext = React.useContext(AppContext)
 
-  const handleAddProduct = product => {
+  const openNotification = () => {
+    notification.success({
+      message: `Producto añadido`,
+    })
+  }
+
+  const handleAddProduct = (product, callback) => {
     appContext.dispatch({type: 'addProduct', payload: product})
+    callback()
   }
 
   return (
@@ -32,7 +40,7 @@ const Card: React.FC<CardProps> = ({product}) => {
         </div>
         <button
           className="button-add-cart"
-          onClick={() => handleAddProduct(product)}
+          onClick={() => handleAddProduct(product, openNotification)}
         >
           Agregar
         </button>

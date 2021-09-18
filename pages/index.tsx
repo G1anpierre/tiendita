@@ -35,7 +35,6 @@ export const initialState = {
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'addProduct':
-      console.log('addProduct reduce: ', action.type)
       return {
         cart: [...state.cart, action.payload],
       }
