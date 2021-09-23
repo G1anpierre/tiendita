@@ -22,7 +22,7 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
         placement="right"
         onClose={handleOpenDrawer}
         visible={drawerIsOpen}
-        size={size}
+        size="large"
         extra={
           <Space>
             <Button onClick={handleOpenDrawer}>Cancel</Button>

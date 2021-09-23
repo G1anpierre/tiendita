@@ -3,6 +3,8 @@ import Image from 'next/image'
 import {AppContext} from '../pages/index'
 import {DrawerProps} from 'antd/es/drawer'
 import DrawerContainer from '../components/drawer-container'
+import {ProductType} from '../pages/index'
+import {List, InputNumber, Avatar, Spin} from 'antd'
 
 const Header: React.FC = () => {
   const appContext = useContext(AppContext)
@@ -16,6 +18,10 @@ const Header: React.FC = () => {
   const handleOpenDrawer = () => {
     setSize('large')
     setDrawerIsOpen(!drawerIsOpen)
+  }
+
+  function onChange(value: number) {
+    console.log('changed', value)
   }
 
   return (
@@ -44,9 +50,27 @@ const Header: React.FC = () => {
         drawerIsOpen={drawerIsOpen}
         handleOpenDrawer={handleOpenDrawer}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <List
+          dataSource={cart}
+          renderItem={(item: ProductType) => (
+            <List.Item key={item.id}>
+              <List.Item.Meta
+                avatar={<Avatar src={item.image} size={64} />}
+                title={<a href="https://ant.design">{item.title}</a>}
+                description={item.price}
+              />
+              <div>
+                <InputNumber
+                  size="small"
+                  min={1}
+                  max={100000}
+                  defaultValue={1}
+                  onChange={onChange}
+                />
+              </div>
+            </List.Item>
+          )}
+        ></List>
       </DrawerContainer>
       <style jsx>{`
         .navbar {
