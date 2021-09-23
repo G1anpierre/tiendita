@@ -20,7 +20,7 @@ const Header: React.FC = () => {
     setDrawerIsOpen(!drawerIsOpen)
   }
 
-  function onChange(value: number) {
+  const onChange = (value: number) => {
     console.log('changed', value)
   }
 
