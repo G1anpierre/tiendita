@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Drawer, Button, Space} from 'antd'
 import {DrawerProps} from 'antd/es/drawer'
+import {AppContext} from '../pages/index'
 
 export type DrawerContainerProps = {
   children: React.ReactNode
@@ -13,21 +14,45 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
   drawerIsOpen,
   handleOpenDrawer,
 }) => {
-  const [size, setSize] = useState<DrawerProps['size']>('large')
+  const appContext = useContext(AppContext)
+
+  const {
+    state: {cart},
+  } = appContext
+
+  const handleEmptyCart = () => {
+    appContext.dispatch({type: 'emptyCart'})
+  }
+
+  const calculateNumberOfCartElements = cart => {
+    let total = 0
+    cart.forEach(element => {
+      total += element.quantity
+    })
+    return total
+  }
 
   return (
     <>
       <Drawer
-        title="Drawer"
+        title="Mexico City Marriott Reforma Hotel"
         placement="right"
         onClose={handleOpenDrawer}
         visible={drawerIsOpen}
         size="large"
         extra={
           <Space>
-            <Button onClick={handleOpenDrawer}>Cancel</Button>
+            <Button onClick={handleOpenDrawer}>Close</Button>
+          </Space>
+        }
+        footer={
+          <Space className="footer-buttons">
+            <Button onClick={handleEmptyCart}>Vaciar canasta</Button>
             <Button type="primary" onClick={handleOpenDrawer}>
-              OK
+              <span className="quantity-cart">
+                {calculateNumberOfCartElements(cart)}
+              </span>
+              Ir a pagar
             </Button>
           </Space>
         }
@@ -35,8 +60,13 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
         {children}
       </Drawer>
       <style jsx>{`
-        :global(.ant-drawer-content-wrapper) {
-          width: 768px;
+        :global(.footer-buttons) {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        :global(.quantity-cart) {
+          margin-right: 10px;
         }
       `}</style>
     </>

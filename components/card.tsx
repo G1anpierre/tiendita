@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Image from 'next/image'
 import {ProductType} from '../pages/index'
 import {AppContext} from '../pages/index'
@@ -9,17 +9,41 @@ export type CardProps = {
 }
 
 const Card: React.FC<CardProps> = ({product}) => {
-  const appContext = React.useContext(AppContext)
+  const appContext = useContext(AppContext)
+  const {
+    state: {cart},
+  } = appContext
 
-  const openNotification = () => {
-    notification.success({
-      message: `Producto añadido`,
-    })
+  const openNotification = (isSuccess: boolean) => {
+    if (isSuccess) {
+      notification.error({
+        message: `Product was already added`,
+      })
+    } else {
+      notification.success({
+        message: `Product added`,
+      })
+    }
   }
 
-  const handleAddProduct = (product: ProductType, callback: () => void) => {
-    appContext.dispatch({type: 'addProduct', payload: product})
-    callback()
+  const findElement = (addedProductId: number) => {
+    const isProductInState = cart.some(element => element.id === addedProductId)
+    return isProductInState
+  }
+
+  const handleAddProduct = (
+    product: ProductType,
+    callback: (isSuccess: boolean) => void,
+  ) => {
+    if (findElement(product.id)) {
+      callback(true)
+    } else {
+      appContext.dispatch({
+        type: 'addProduct',
+        payload: {...product, quantity: 1},
+      })
+      callback(false)
+    }
   }
 
   return (

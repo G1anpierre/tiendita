@@ -20,9 +20,12 @@ const Header: React.FC = () => {
     setDrawerIsOpen(!drawerIsOpen)
   }
 
-  const onChange = (value: number) => {
+  const onChange = (value: number, id: number) => {
     console.log('changed', value)
+    appContext.dispatch({type: 'addQuantity', productInfo: {value, id}})
   }
+
+  console.log('cart :', cart)
 
   return (
     <>
@@ -64,8 +67,8 @@ const Header: React.FC = () => {
                   size="small"
                   min={1}
                   max={100000}
-                  defaultValue={1}
-                  onChange={onChange}
+                  defaultValue={item.quantity}
+                  onChange={value => onChange(value, item.id)}
                 />
               </div>
             </List.Item>

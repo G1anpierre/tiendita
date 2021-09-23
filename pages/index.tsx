@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '../components/card'
 import Header from '../components/header'
+import {notification} from 'antd'
 
 export type RatingType = {
   count: number
@@ -15,6 +16,7 @@ export type ProductType = {
   image: string
   price: number
   rating: RatingType
+  quantity?: number
 }
 
 export type ProductsType = {
@@ -32,6 +34,13 @@ export const initialState = {
   cart: [],
 }
 
+const findElement = (state, addedProductId: number) => {
+  const isProductInState = state.cart.some(
+    element => element.id === addedProductId,
+  )
+  return isProductInState
+}
+
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'addProduct':
@@ -40,7 +49,25 @@ export const reducer = (state, action) => {
       }
     case 'removeProduct':
       return {
-        cart: state.cart.filter(element => element.id !== action.id),
+        cart: state.cart.filter(
+          (element: ProductType) => element.id !== action.id,
+        ),
+      }
+    case 'addQuantity':
+      return {
+        cart: state.cart.map((element: ProductType) => {
+          if (element.id === action.productInfo.id) {
+            return {
+              ...element,
+              quantity: action.productInfo.value,
+            }
+          }
+          return element
+        }),
+      }
+    case 'emptyCart':
+      return {
+        cart: [],
       }
   }
 }
