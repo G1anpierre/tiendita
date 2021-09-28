@@ -3,6 +3,7 @@ import Image from 'next/image'
 import {ProductType} from '../pages/index'
 import {AppContext} from '../pages/index'
 import {notification} from 'antd'
+import {findElement} from '../utilities'
 
 export type CardProps = {
   product: ProductType
@@ -26,16 +27,11 @@ const Card: React.FC<CardProps> = ({product}) => {
     }
   }
 
-  const findElement = (addedProductId: number) => {
-    const isProductInState = cart.some(element => element.id === addedProductId)
-    return isProductInState
-  }
-
   const handleAddProduct = (
     product: ProductType,
     callback: (isSuccess: boolean) => void,
   ) => {
-    if (findElement(product.id)) {
+    if (findElement(cart, product.id)) {
       callback(true)
     } else {
       appContext.dispatch({

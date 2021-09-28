@@ -5,18 +5,17 @@ import {DrawerProps} from 'antd/es/drawer'
 import DrawerContainer from '../components/drawer-container'
 import {ProductType} from '../pages/index'
 import {List, InputNumber, Avatar, Spin} from 'antd'
+import {calculateNumberOfCartElements} from '../utilities'
 
 const Header: React.FC = () => {
   const appContext = useContext(AppContext)
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
-  const [size, setSize] = useState<DrawerProps['size']>()
 
   const {
     state: {cart},
   } = appContext
 
   const handleOpenDrawer = () => {
-    setSize('large')
     setDrawerIsOpen(!drawerIsOpen)
   }
 
@@ -42,7 +41,9 @@ const Header: React.FC = () => {
                 width={20}
               />
             </span>
-            <span className="cart-info__quantity">{cart.length}</span>
+            <span className="cart-info__quantity">
+              {calculateNumberOfCartElements(cart)}
+            </span>
           </div>
         </nav>
         <div className="hero">

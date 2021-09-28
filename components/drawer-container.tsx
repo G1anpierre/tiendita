@@ -2,6 +2,8 @@ import React, {useState, useContext} from 'react'
 import {Drawer, Button, Space} from 'antd'
 import {DrawerProps} from 'antd/es/drawer'
 import {AppContext} from '../pages/index'
+import {calculateNumberOfCartElements, calculateTotalPrice} from '../utilities'
+import Link from 'next/link'
 
 export type DrawerContainerProps = {
   children: React.ReactNode
@@ -24,14 +26,6 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
     appContext.dispatch({type: 'emptyCart'})
   }
 
-  const calculateNumberOfCartElements = cart => {
-    let total = 0
-    cart.forEach(element => {
-      total += element.quantity
-    })
-    return total
-  }
-
   return (
     <>
       <Drawer
@@ -48,12 +42,15 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
         footer={
           <Space className="footer-buttons">
             <Button onClick={handleEmptyCart}>Vaciar canasta</Button>
-            <Button type="primary" onClick={handleOpenDrawer}>
-              <span className="quantity-cart">
-                {calculateNumberOfCartElements(cart)}
-              </span>
-              Ir a pagar
-            </Button>
+            <Link href="/payment/card">
+              <Button type="primary" onClick={handleOpenDrawer}>
+                <span className="quantity-cart">
+                  {calculateNumberOfCartElements(cart)}
+                </span>
+                <span className="go-to-payment">Ir a pagar</span>
+                <span className="total-price">{calculateTotalPrice(cart)}</span>
+              </Button>
+            </Link>
           </Space>
         }
       >
@@ -66,7 +63,18 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
         }
 
         :global(.quantity-cart) {
-          margin-right: 10px;
+          background-color: blue;
+          border-radius: 5px;
+          padding: 0 8px;
+        }
+
+        :global(.go-to-payment) {
+          margin: 0 25px;
+          font-weight: bold;
+        }
+
+        :global(.total-price) {
+          font-weight: ligth;
         }
       `}</style>
     </>

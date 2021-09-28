@@ -34,13 +34,6 @@ export const initialState = {
   cart: [],
 }
 
-const findElement = (state, addedProductId: number) => {
-  const isProductInState = state.cart.some(
-    element => element.id === addedProductId,
-  )
-  return isProductInState
-}
-
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'addProduct':
