@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from '../components/card'
 import Header from '../components/header'
-import {notification} from 'antd'
 
 export type RatingType = {
   count: number
@@ -28,42 +27,42 @@ export type HomeProps = {
   data2: ProductType[]
 }
 
-export const AppContext = React.createContext()
+// export const AppContext = React.createContext()
 
-export const initialState = {
-  cart: [],
-}
+// export const initialState = {
+//   cart: [],
+// }
 
-export const reducer = (state, action) => {
-  switch (action.type) {
-    case 'addProduct':
-      return {
-        cart: [...state.cart, action.payload],
-      }
-    case 'removeProduct':
-      return {
-        cart: state.cart.filter(
-          (element: ProductType) => element.id !== action.id,
-        ),
-      }
-    case 'addQuantity':
-      return {
-        cart: state.cart.map((element: ProductType) => {
-          if (element.id === action.productInfo.id) {
-            return {
-              ...element,
-              quantity: action.productInfo.value,
-            }
-          }
-          return element
-        }),
-      }
-    case 'emptyCart':
-      return {
-        cart: [],
-      }
-  }
-}
+// export const reducer = (state, action) => {
+//   switch (action.type) {
+//     case 'addProduct':
+//       return {
+//         cart: [...state.cart, action.payload],
+//       }
+//     case 'removeProduct':
+//       return {
+//         cart: state.cart.filter(
+//           (element: ProductType) => element.id !== action.id,
+//         ),
+//       }
+//     case 'addQuantity':
+//       return {
+//         cart: state.cart.map((element: ProductType) => {
+//           if (element.id === action.productInfo.id) {
+//             return {
+//               ...element,
+//               quantity: action.productInfo.value,
+//             }
+//           }
+//           return element
+//         }),
+//       }
+//     case 'emptyCart':
+//       return {
+//         cart: [],
+//       }
+//   }
+// }
 
 export async function getStaticProps() {
   const res = await fetch(`https://fakestoreapi.com/products?limit=15`)
@@ -85,37 +84,37 @@ export async function getStaticProps() {
 }
 
 const Home: React.FC<HomeProps> = ({data, data2}) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState)
+  // const [state, dispatch] = React.useReducer(reducer, initialState)
 
   return (
     <>
-      <AppContext.Provider value={{state, dispatch}}>
-        <div className="home">
-          <Header />
-          <div className="main">
-            {/* Ofertas */}
-            <section className="ofertas">
-              <h1 className="ofertas__title">Ofertas</h1>
-              <div className="ofertas__cards">
-                {data.map((product: ProductType) => (
-                  <Card product={product} key={product.id} />
-                ))}
-              </div>
-            </section>
+      {/* <AppContext.Provider value={{state, dispatch}}> */}
+      <div className="home">
+        <Header />
+        <div className="main">
+          {/* Ofertas */}
+          <section className="ofertas">
+            <h1 className="ofertas__title">Ofertas</h1>
+            <div className="ofertas__cards">
+              {data.map((product: ProductType) => (
+                <Card product={product} key={product.id} />
+              ))}
+            </div>
+          </section>
 
-            {/* Populars */}
-            <section className="populars">
-              <h1 className="populars__title">Los mas populares</h1>
-              <div className="populars__cards">
-                {data2.map((product: ProductType) => (
-                  <Card product={product} key={product.id} />
-                ))}
-              </div>
-            </section>
-          </div>
-          <footer className="footer">footer</footer>
+          {/* Populars */}
+          <section className="populars">
+            <h1 className="populars__title">Los mas populares</h1>
+            <div className="populars__cards">
+              {data2.map((product: ProductType) => (
+                <Card product={product} key={product.id} />
+              ))}
+            </div>
+          </section>
         </div>
-      </AppContext.Provider>
+        <footer className="footer">footer</footer>
+      </div>
+      {/* </AppContext.Provider> */}
       <style jsx>
         {`
           .home {

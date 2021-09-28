@@ -1,10 +1,9 @@
 import React, {useContext, useState} from 'react'
 import Image from 'next/image'
-import {AppContext} from '../pages/index'
+import {AppContext} from '../context'
 import {DrawerProps} from 'antd/es/drawer'
 import DrawerContainer from '../components/drawer-container'
-import {ProductType} from '../pages/index'
-import {List, InputNumber, Avatar, Spin} from 'antd'
+import ListCartProducts from '../components/list'
 import {calculateNumberOfCartElements} from '../utilities'
 
 const Header: React.FC = () => {
@@ -18,13 +17,6 @@ const Header: React.FC = () => {
   const handleOpenDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen)
   }
-
-  const onChange = (value: number, id: number) => {
-    console.log('changed', value)
-    appContext.dispatch({type: 'addQuantity', productInfo: {value, id}})
-  }
-
-  console.log('cart :', cart)
 
   return (
     <>
@@ -54,27 +46,7 @@ const Header: React.FC = () => {
         drawerIsOpen={drawerIsOpen}
         handleOpenDrawer={handleOpenDrawer}
       >
-        <List
-          dataSource={cart}
-          renderItem={(item: ProductType) => (
-            <List.Item key={item.id}>
-              <List.Item.Meta
-                avatar={<Avatar src={item.image} size={64} />}
-                title={<a href="https://ant.design">{item.title}</a>}
-                description={item.price}
-              />
-              <div>
-                <InputNumber
-                  size="small"
-                  min={1}
-                  max={100000}
-                  defaultValue={item.quantity}
-                  onChange={value => onChange(value, item.id)}
-                />
-              </div>
-            </List.Item>
-          )}
-        ></List>
+        <ListCartProducts />
       </DrawerContainer>
       <style jsx>{`
         .navbar {

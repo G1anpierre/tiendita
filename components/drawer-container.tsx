@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import {Drawer, Button, Space} from 'antd'
 import {DrawerProps} from 'antd/es/drawer'
-import {AppContext} from '../pages/index'
+import {AppContext} from '../context'
 import {calculateNumberOfCartElements, calculateTotalPrice} from '../utilities'
 import Link from 'next/link'
 

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import Image from 'next/image'
 import {ProductType} from '../pages/index'
-import {AppContext} from '../pages/index'
+import {AppContext} from '../context'
 import {notification} from 'antd'
 import {findElement} from '../utilities'
 
