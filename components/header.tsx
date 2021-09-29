@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import Image from 'next/image'
 import {AppContext} from '../context'
-import {DrawerProps} from 'antd/es/drawer'
+
 import DrawerContainer from '../components/drawer-container'
 import ListCartProducts from '../components/list'
 import {calculateNumberOfCartElements} from '../utilities'
@@ -9,10 +9,7 @@ import {calculateNumberOfCartElements} from '../utilities'
 const Header: React.FC = () => {
   const appContext = useContext(AppContext)
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
-
-  const {
-    state: {cart},
-  } = appContext
+  const {cart} = appContext
 
   const handleOpenDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen)

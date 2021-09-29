@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import {Drawer, Button, Space} from 'antd'
 import {DrawerProps} from 'antd/es/drawer'
-import {AppContext} from '../context'
+import {AppContext, AppDispatchContext, useAppMutations} from '../context'
 import {calculateNumberOfCartElements, calculateTotalPrice} from '../utilities'
 import Link from 'next/link'
 
@@ -18,12 +18,13 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
 }) => {
   const appContext = useContext(AppContext)
 
-  const {
-    state: {cart},
-  } = appContext
+  const {emptyCart} = useAppMutations()
+
+  const {cart} = appContext
 
   const handleEmptyCart = () => {
-    appContext.dispatch({type: 'emptyCart'})
+    emptyCart()
+    // appDispatchContext({type: 'emptyCart'})
   }
 
   return (

@@ -1,10 +1,31 @@
-import React from 'react'
+import React, {useReducer} from 'react'
 
-export const AppContext = React.createContext()
+type InitialStateType = {
+  cart: []
+}
+
+type ProductInfoType = {
+  id: number
+  value: number
+}
+
+type ActionType = {
+  type: 'addProduct' | 'removeProduct' | 'addQuantity' | 'emptyCart'
+  payload?: ProductType
+  id?: number
+  productInfo?: any
+}
 
 export const initialState = {
   cart: [],
 }
+
+const defaultState = {} as InitialStateType
+
+export const AppContext = React.createContext(defaultState)
+export const AppDispatchContext = React.createContext(
+  (() => {}) as React.Dispatch<ActionType>,
+)
 
 export type RatingType = {
   count: number
@@ -22,7 +43,7 @@ export type ProductType = {
   quantity?: number
 }
 
-export const reducer = (state, action) => {
+export const reducer = (state: InitialStateType, action: ActionType) => {
   switch (action.type) {
     case 'addProduct':
       return {
@@ -35,12 +56,13 @@ export const reducer = (state, action) => {
         ),
       }
     case 'addQuantity':
+      const {id, value} = action.productInfo
       return {
         cart: state.cart.map((element: ProductType) => {
-          if (element.id === action.productInfo.id) {
+          if (element.id === id) {
             return {
               ...element,
-              quantity: action.productInfo.value,
+              quantity: value,
             }
           }
           return element
@@ -53,14 +75,43 @@ export const reducer = (state, action) => {
   }
 }
 
-export const AppStateProvider: React.FC = ({children}) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState)
+export const AppStateProvider = ({children}: {children: React.ReactNode}) => {
+  //@ts-ignore
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
     <>
-      <AppContext.Provider value={{state, dispatch}}>
-        {children}
+      <AppContext.Provider value={state}>
+        <AppDispatchContext.Provider value={dispatch}>
+          {children}
+        </AppDispatchContext.Provider>
       </AppContext.Provider>
     </>
   )
+}
+
+export const useAppMutations = () => {
+  const dispatch = React.useContext(AppDispatchContext)
+
+  const addProduct = (payload: any) =>
+    dispatch({
+      type: 'addProduct',
+      payload,
+    })
+
+  const emptyCart = () =>
+    dispatch({
+      type: 'emptyCart',
+    })
+
+  const addQuantity = (productInfo: any) =>
+    dispatch({
+      type: 'addQuantity',
+      productInfo,
+    })
+  return {
+    addProduct,
+    emptyCart,
+    addQuantity,
+  }
 }

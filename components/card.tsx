@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import Image from 'next/image'
 import {ProductType} from '../pages/index'
-import {AppContext} from '../context'
+import {AppContext, useAppMutations} from '../context'
 import {notification} from 'antd'
 import {findElement} from '../utilities'
 
@@ -11,9 +11,9 @@ export type CardProps = {
 
 const Card: React.FC<CardProps> = ({product}) => {
   const appContext = useContext(AppContext)
-  const {
-    state: {cart},
-  } = appContext
+  const {addProduct} = useAppMutations()
+
+  const {cart} = appContext
 
   const openNotification = (isSuccess: boolean) => {
     if (isSuccess) {
@@ -34,10 +34,7 @@ const Card: React.FC<CardProps> = ({product}) => {
     if (findElement(cart, product.id)) {
       callback(true)
     } else {
-      appContext.dispatch({
-        type: 'addProduct',
-        payload: {...product, quantity: 1},
-      })
+      addProduct({...product, quantity: 1})
       callback(false)
     }
   }

@@ -27,43 +27,6 @@ export type HomeProps = {
   data2: ProductType[]
 }
 
-// export const AppContext = React.createContext()
-
-// export const initialState = {
-//   cart: [],
-// }
-
-// export const reducer = (state, action) => {
-//   switch (action.type) {
-//     case 'addProduct':
-//       return {
-//         cart: [...state.cart, action.payload],
-//       }
-//     case 'removeProduct':
-//       return {
-//         cart: state.cart.filter(
-//           (element: ProductType) => element.id !== action.id,
-//         ),
-//       }
-//     case 'addQuantity':
-//       return {
-//         cart: state.cart.map((element: ProductType) => {
-//           if (element.id === action.productInfo.id) {
-//             return {
-//               ...element,
-//               quantity: action.productInfo.value,
-//             }
-//           }
-//           return element
-//         }),
-//       }
-//     case 'emptyCart':
-//       return {
-//         cart: [],
-//       }
-//   }
-// }
-
 export async function getStaticProps() {
   const res = await fetch(`https://fakestoreapi.com/products?limit=15`)
   const res2 = await fetch(
