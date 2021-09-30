@@ -1,15 +1,13 @@
 import React, {useContext, useState} from 'react'
 import Image from 'next/image'
-import {AppContext} from '../context'
+import {useAppState} from '../context'
 
 import DrawerContainer from '../components/drawer-container'
 import ListCartProducts from '../components/list'
-import {calculateNumberOfCartElements} from '../utilities'
 
 const Header: React.FC = () => {
-  const appContext = useContext(AppContext)
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
-  const {cart} = appContext
+  const {numberOfCartElements} = useAppState()
 
   const handleOpenDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen)
@@ -30,9 +28,7 @@ const Header: React.FC = () => {
                 width={20}
               />
             </span>
-            <span className="cart-info__quantity">
-              {calculateNumberOfCartElements(cart)}
-            </span>
+            <span className="cart-info__quantity">{numberOfCartElements}</span>
           </div>
         </nav>
         <div className="hero">

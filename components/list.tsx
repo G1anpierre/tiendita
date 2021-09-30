@@ -1,15 +1,13 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import {List, InputNumber, Avatar, Spin} from 'antd'
 import {ProductType} from '../pages/index'
-import {AppContext, useAppMutations} from '../context'
+import {useAppMutations, useAppState} from '../context'
 
 const ListCartProducts = () => {
-  const appContext = useContext(AppContext)
-  const {cart} = appContext
+  const {cart} = useAppState()
   const {addQuantity} = useAppMutations()
 
   const onChange = (value: number, id: number) => {
-    // appContext.dispatch({type: 'addQuantity', productInfo: {value, id}})
     addQuantity({value, id})
   }
 

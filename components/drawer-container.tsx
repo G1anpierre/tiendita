@@ -1,8 +1,7 @@
-import React, {useState, useContext} from 'react'
+import React from 'react'
 import {Drawer, Button, Space} from 'antd'
-import {DrawerProps} from 'antd/es/drawer'
-import {AppContext, AppDispatchContext, useAppMutations} from '../context'
-import {calculateNumberOfCartElements, calculateTotalPrice} from '../utilities'
+import {useAppMutations, useAppState} from '../context'
+
 import Link from 'next/link'
 
 export type DrawerContainerProps = {
@@ -16,15 +15,11 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
   drawerIsOpen,
   handleOpenDrawer,
 }) => {
-  const appContext = useContext(AppContext)
-
+  const {numberOfCartElements, totalPrice} = useAppState()
   const {emptyCart} = useAppMutations()
-
-  const {cart} = appContext
 
   const handleEmptyCart = () => {
     emptyCart()
-    // appDispatchContext({type: 'emptyCart'})
   }
 
   return (
@@ -45,11 +40,9 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
             <Button onClick={handleEmptyCart}>Vaciar canasta</Button>
             <Link href="/payment/card">
               <Button type="primary" onClick={handleOpenDrawer}>
-                <span className="quantity-cart">
-                  {calculateNumberOfCartElements(cart)}
-                </span>
+                <span className="quantity-cart">{numberOfCartElements}</span>
                 <span className="go-to-payment">Ir a pagar</span>
-                <span className="total-price">{calculateTotalPrice(cart)}</span>
+                <span className="total-price">{totalPrice}</span>
               </Button>
             </Link>
           </Space>

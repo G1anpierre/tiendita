@@ -1,4 +1,5 @@
 import React, {useReducer} from 'react'
+import {calculateNumberOfCartElements, calculateTotalPrice} from '../utilities'
 
 type InitialStateType = {
   cart: []
@@ -88,6 +89,20 @@ export const AppStateProvider = ({children}: {children: React.ReactNode}) => {
       </AppContext.Provider>
     </>
   )
+}
+
+export const useAppState = () => {
+  const appState = React.useContext(AppContext)
+  const {cart} = appState
+
+  const numberOfCartElements = calculateNumberOfCartElements(cart)
+  const totalPrice = calculateTotalPrice(cart)
+
+  return {
+    numberOfCartElements,
+    totalPrice,
+    cart,
+  }
 }
 
 export const useAppMutations = () => {
