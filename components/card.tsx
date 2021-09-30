@@ -47,8 +47,9 @@ const Card: React.FC<CardProps> = ({product}) => {
             src={product.image}
             alt={product.title}
             height={50}
-            width={50}
             layout="responsive"
+            width={50}
+            className="product-image"
           />
         </div>
         <div className="card__text-info">
@@ -81,6 +82,11 @@ const Card: React.FC<CardProps> = ({product}) => {
           padding: 10px 0;
           font: normal 400 14px/16px Poppins;
           cursor: pointer;
+        }
+
+        :global(.product-image) {
+          width: 100%;
+          he
         }
       `}</style>
     </>
