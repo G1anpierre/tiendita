@@ -1,7 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 import {ProductType} from '../pages/index'
-import {useAppMutations, useAppState} from '../context'
+import {useAppMutations} from '../stateHelpers/useDispatch'
+import {useAppState} from '../stateHelpers/useState'
 import {notification} from 'antd'
 
 export type CardProps = {
