@@ -1,12 +1,30 @@
 import React from 'react'
-import {Row, Col, Layout} from 'antd'
+import {useRouter} from 'next/router'
+import {Row, Col, Layout, PageHeader} from 'antd'
 import ListCartProducts from '../../components/list'
+import {LeftCircleFilled} from '@ant-design/icons'
 const {Content} = Layout
 
 const CardPayment = () => {
+  const router = useRouter()
+
+  const handleGoBack = () => {
+    router.back()
+  }
+
   return (
     <>
       <Content style={{padding: '30px 50px', background: '#FAFAF8'}}>
+        <Row>
+          <Col span={24}>
+            <PageHeader
+              className="site-page-header"
+              onBack={() => handleGoBack()}
+              backIcon={<LeftCircleFilled style={{fontSize: '30px'}} />}
+              subTitle="Volver"
+            />
+          </Col>
+        </Row>
         <Row gutter={[200, 0]}>
           <Col span={12}>
             <div className="list-products">
