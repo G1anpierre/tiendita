@@ -1,7 +1,8 @@
 import React from 'react'
 import {List, InputNumber, Avatar, Spin} from 'antd'
 import {ProductType} from '../pages/index'
-import {useAppMutations, useAppState} from '../context'
+import {useAppMutations} from '../stateHelpers/useDispatch'
+import {useAppState} from '../stateHelpers/useState'
 
 const ListCartProducts = () => {
   const {cart} = useAppState()
