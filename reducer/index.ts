@@ -1,11 +1,17 @@
 import {ProductType} from '../types/product'
+import {
+  ADD_PRODUCT,
+  REMOVE_PRODUCT,
+  ADD_QUANTITY,
+  EMPTY_CART,
+} from '../stateHelpers/stateVariables'
 
 export type InitialStateType = {
   cart: []
 }
 
 export type ActionType = {
-  type: 'addProduct' | 'removeProduct' | 'addQuantity' | 'emptyCart'
+  type: 'ADD_PRODUCT' | 'REMOVE_PRODUCT' | 'ADD_QUANTITY' | 'EMPTY_CART'
   payload?: ProductType
   id?: number
   productInfo?: any
@@ -13,17 +19,17 @@ export type ActionType = {
 
 export const reducer = (state: InitialStateType, action: ActionType) => {
   switch (action.type) {
-    case 'addProduct':
+    case ADD_PRODUCT:
       return {
         cart: [...state.cart, action.payload],
       }
-    case 'removeProduct':
+    case REMOVE_PRODUCT:
       return {
         cart: state.cart.filter(
           (element: ProductType) => element.id !== action.id,
         ),
       }
-    case 'addQuantity':
+    case ADD_QUANTITY:
       const {id, value} = action.productInfo
       return {
         cart: state.cart.map((element: ProductType) => {
@@ -36,7 +42,7 @@ export const reducer = (state: InitialStateType, action: ActionType) => {
           return element
         }),
       }
-    case 'emptyCart':
+    case EMPTY_CART:
       return {
         cart: [],
       }

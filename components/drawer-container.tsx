@@ -15,7 +15,7 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
   drawerIsOpen,
   handleOpenDrawer,
 }) => {
-  const {numberOfCartElements, totalPrice} = useAppState()
+  const {numberOfCartElements, totalPrice, isDisable} = useAppState()
   const {emptyCart} = useAppMutations()
 
   const handleEmptyCart = () => {
@@ -39,7 +39,11 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
           <Space className="footer-buttons">
             <Button onClick={handleEmptyCart}>Vaciar canasta</Button>
             <Link href="/payment/card">
-              <Button type="primary" onClick={handleOpenDrawer}>
+              <Button
+                type="primary"
+                onClick={handleOpenDrawer}
+                disabled={isDisable}
+              >
                 <span className="quantity-cart">{numberOfCartElements}</span>
                 <span className="go-to-payment">Ir a pagar</span>
                 <span className="total-price">{totalPrice}</span>
@@ -57,7 +61,7 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
         }
 
         :global(.quantity-cart) {
-          background-color: blue;
+          background-color: ${isDisable ? 'grey' : 'blue'};
           border-radius: 5px;
           padding: 0 8px;
         }

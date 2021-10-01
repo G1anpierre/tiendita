@@ -21,4 +21,13 @@ const findElement = state => {
   return innerFunction
 }
 
-export {calculateNumberOfCartElements, calculateTotalPrice, findElement}
+const cartIsEmpty = state => {
+  return state.length === 0
+}
+
+export {
+  calculateNumberOfCartElements,
+  calculateTotalPrice,
+  findElement,
+  cartIsEmpty,
+}
