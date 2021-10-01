@@ -1,6 +1,3 @@
-// import {useAppState} from '../context'
-// const {cart} = useAppState()
-
 const calculateNumberOfCartElements = cart => {
   let total = 0
   cart.forEach(element => {
@@ -17,18 +14,11 @@ const calculateTotalPrice = cart => {
   return totalPrice.toFixed(2)
 }
 
-const findElement = (cart, addedProductId) => {
-  const isProductInState = cart.some(element => element.id === addedProductId)
-  return isProductInState
+const findElement = state => {
+  const innerFunction = addedProductId => {
+    return state.some(element => element.id === addedProductId)
+  }
+  return innerFunction
 }
-
-// const findElement = state => {
-//   const innerFunction = addedProductId => {
-//     return state.some(element => element.id === addedProductId)
-//   }
-//   return innerFunction
-// }
-
-// const foundElement = findElement(cart)
 
 export {calculateNumberOfCartElements, calculateTotalPrice, findElement}

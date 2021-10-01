@@ -1,5 +1,9 @@
 import React, {useReducer} from 'react'
-import {calculateNumberOfCartElements, calculateTotalPrice} from '../utilities'
+import {
+  calculateNumberOfCartElements,
+  calculateTotalPrice,
+  findElement,
+} from '../utilities'
 
 type InitialStateType = {
   cart: []
@@ -97,10 +101,12 @@ export const useAppState = () => {
 
   const numberOfCartElements = calculateNumberOfCartElements(cart)
   const totalPrice = calculateTotalPrice(cart)
+  const foundElement = findElement(cart)
 
   return {
     numberOfCartElements,
     totalPrice,
+    foundElement,
     cart,
   }
 }
