@@ -4,6 +4,7 @@ import {ProductType} from '../pages/index'
 import {useAppMutations} from '../stateHelpers/useDispatch'
 import {useAppState} from '../stateHelpers/useState'
 import {notification} from 'antd'
+import Button from '../components/button'
 
 export type CardProps = {
   product: ProductType
@@ -45,8 +46,8 @@ const Card: React.FC<CardProps> = ({product}) => {
             src={product.image}
             alt={product.title}
             height={50}
-            layout="responsive"
             width={50}
+            layout="responsive"
             className="product-image"
           />
         </div>
@@ -54,12 +55,9 @@ const Card: React.FC<CardProps> = ({product}) => {
           <div className="card__subtitle">{product.price}</div>
           <div className="card__title">{product.title}</div>
         </div>
-        <button
-          className="button-add-cart"
-          onClick={() => handleAddProduct(product, openNotification)}
-        >
-          Agregar
-        </button>
+        <Button callback={() => handleAddProduct(product, openNotification)}>
+          Agragar
+        </Button>
       </div>
       <style jsx>{`
         .card {
