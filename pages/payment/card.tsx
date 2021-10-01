@@ -25,7 +25,7 @@ const CardPayment = () => {
             />
           </Col>
         </Row>
-        <Row gutter={[200, 0]}>
+        <Row gutter={[130, 0]}>
           <Col span={12}>
             <div className="list-products">
               <ListCartProducts />
