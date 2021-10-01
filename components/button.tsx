@@ -1,11 +1,11 @@
 import React from 'react'
 
-type ButtonType = {
+type ButtonProps = {
   children: React.ReactNode
   callback: () => void
 }
 
-const Button: React.FC<ButtonType> = ({children, callback}) => {
+const Button: React.FC<ButtonProps> = ({children, callback}) => {
   return (
     <>
       <button className="button primary" onClick={callback}>
