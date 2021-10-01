@@ -16,6 +16,7 @@ const ListCartProducts = () => {
     <>
       <List
         dataSource={cart}
+        locale={{emptyText: ' '}}
         renderItem={(item: ProductType) => (
           <List.Item key={item.id}>
             <List.Item.Meta
