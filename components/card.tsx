@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
-import {ProductType} from '../pages/index'
-import {useAppMutations} from '../stateHelpers/useDispatch'
-import {useAppState} from '../stateHelpers/useState'
+import {ProductType} from '@pages/index'
+import {useAppMutations} from '@stateHelpers/useDispatch'
+import {useAppState} from '@stateHelpers/useState'
 import {notification} from 'antd'
-import Button from '../components/button'
+import Button from '@components/button'
 
 export type CardProps = {
   product: ProductType

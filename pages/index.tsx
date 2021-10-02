@@ -1,6 +1,6 @@
 import React from 'react'
-import Card from '../components/card'
-import Header from '../components/header'
+import Card from '@components/card'
+import Header from '@components/header'
 
 export type RatingType = {
   count: number
