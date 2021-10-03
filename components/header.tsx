@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import Image from 'next/image'
-import {useAppState} from '../stateHelpers/useState'
-import DrawerContainer from '../components/drawer-container'
-import ListCartProducts from '../components/list'
-import CartEmpty from '../components/cart-empty'
+import {useAppState} from '@stateHelpers/useState'
+import DrawerContainer from '@components/drawer-container'
+import ListCartProducts from '@components/list'
+import CartEmpty from '@components/cart-empty'
 
 const Header: React.FC = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
