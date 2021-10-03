@@ -1,0 +1,3 @@
+export const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
+export const NEXT_PUBLIC_STRIPE_PUBLISH_KEY =
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISH_KEY

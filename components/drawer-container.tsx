@@ -2,6 +2,9 @@ import React from 'react'
 import {Drawer, Button, Space} from 'antd'
 import {useAppMutations} from '@stateHelpers/useDispatch'
 import {useAppState} from '@stateHelpers/useState'
+import {loadStripe} from '@stripe/stripe-js'
+import {NEXT_PUBLIC_STRIPE_PUBLISH_KEY} from 'config'
+
 import Link from 'next/link'
 
 export type DrawerContainerProps = {
@@ -9,6 +12,8 @@ export type DrawerContainerProps = {
   drawerIsOpen: boolean
   handleOpenDrawer: () => void
 }
+
+const stripePromise = loadStripe(`${NEXT_PUBLIC_STRIPE_PUBLISH_KEY}`)
 
 const DrawerContainer: React.FC<DrawerContainerProps> = ({
   children,
@@ -20,6 +25,24 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
 
   const handleEmptyCart = () => {
     emptyCart()
+  }
+
+  const handleClick = async () => {
+    console.log('hanlde click')
+    // const { sessionId } = await fetchCheckoutSeetion()
+    const {sessionId} = await fetch('/api/checkout/session', {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json',
+      },
+      body: JSON.stringify({quantity: 1}),
+    }).then(res => res.json())
+
+    const stripe = await stripePromise
+    const {error} = await stripe?.redirectToCheckout({
+      sessionId,
+    })
+    console.log(error)
   }
 
   return (
@@ -38,17 +61,13 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
         footer={
           <Space className="footer-buttons">
             <Button onClick={handleEmptyCart}>Vaciar canasta</Button>
-            <Link href="/payment/card">
-              <Button
-                type="primary"
-                onClick={handleOpenDrawer}
-                disabled={isDisable}
-              >
-                <span className="quantity-cart">{numberOfCartElements}</span>
-                <span className="go-to-payment">Ir a pagar</span>
-                <span className="total-price">{totalPrice}</span>
-              </Button>
-            </Link>
+            {/* <Link href="/payment/card"> */}
+            <Button type="primary" onClick={handleClick} disabled={isDisable}>
+              <span className="quantity-cart">{numberOfCartElements}</span>
+              <span className="go-to-payment">Ir a pagar</span>
+              <span className="total-price">{totalPrice}</span>
+            </Button>
+            {/* </Link> */}
           </Space>
         }
       >
