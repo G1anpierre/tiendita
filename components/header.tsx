@@ -27,9 +27,15 @@ const Header: React.FC = () => {
         <nav className="navbar">
           <div className="logo">Tiendita</div>
           <div className="place">Mexico City Reforma</div>
-          <div className="user" onClick={() => signIn()}>
-            Hello Gianpierre
-          </div>
+          {session ? (
+            <div className="user" onClick={() => signOut()}>
+              Hello Gianpierre, Sign Out
+            </div>
+          ) : (
+            <div className="user" onClick={() => signIn()}>
+              Sign In
+            </div>
+          )}
           <div className="cart-info" onClick={handleOpenDrawer}>
             <span className="cart-info__icon">
               <Image
