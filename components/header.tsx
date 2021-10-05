@@ -4,10 +4,12 @@ import {useAppState} from '@stateHelpers/useState'
 import DrawerContainer from '@components/drawer-container'
 import ListCartProducts from '@components/list'
 import CartEmpty from '@components/cart-empty'
+import {useSession, signIn, signOut} from 'next-auth/react'
 
 const Header: React.FC = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
   const {numberOfCartElements} = useAppState()
+  const {data: session, status} = useSession()
 
   const handleOpenDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen)
@@ -19,6 +21,15 @@ const Header: React.FC = () => {
         <nav className="navbar">
           <div className="logo">Tiendita</div>
           <div className="place">Mexico City Reforma</div>
+          {session ? (
+            <div className="user" onClick={() => signOut()}>
+              Hello Gianpierre, Sign Out
+            </div>
+          ) : (
+            <div className="user" onClick={() => signIn()}>
+              Sign In
+            </div>
+          )}
           <div className="cart-info" onClick={handleOpenDrawer}>
             <span className="cart-info__icon">
               <Image
@@ -50,7 +61,7 @@ const Header: React.FC = () => {
           display: grid;
           grid-template-columns: 1fr 1fr;
           grid-template-rows: auto;
-          grid-template-areas: 'logo cart-info' 'place place';
+          grid-template-areas: 'logo user cart-info' 'place place place';
           align-items: center;
           padding: 15px 0;
         }
@@ -83,6 +94,15 @@ const Header: React.FC = () => {
           margin-left: 8px;
         }
 
+        .user {
+          grid-area: user;
+          justify-self: end;
+          padding-right: 10px;
+          margin-right: 10px;
+          border-right: 1px solid black;
+          cursor: pointer;
+        }
+
         .hero {
           background-image: url('./images/banner-desktop.svg');
           background-position: center;
@@ -101,10 +121,15 @@ const Header: React.FC = () => {
 
         @media screen and (min-width: 768px) {
           .navbar {
-            grid-template-areas: 'logo place cart-info';
+            grid-template-areas: 'logo user place cart-info';
             grid-auto-flow: column;
+            grid-column-gap: 10px;
             padding: 30px 0;
             margin-bottom: 30px;
+          }
+
+          .user {
+            margin-right: 0px;
           }
 
           .place {
