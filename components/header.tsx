@@ -11,12 +11,6 @@ const Header: React.FC = () => {
   const {numberOfCartElements} = useAppState()
   const {data: session, status} = useSession()
 
-  if (status === 'authenticated') {
-    console.log('session: ', session)
-  }
-
-  console.log('status" ', status)
-
   const handleOpenDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen)
   }
