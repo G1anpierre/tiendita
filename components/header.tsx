@@ -13,8 +13,6 @@ const Header: React.FC = () => {
   const {data: session, status} = useSession()
   const router = useRouter()
 
-  console.log('router: ', router)
-
   const handleOpenDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen)
   }
