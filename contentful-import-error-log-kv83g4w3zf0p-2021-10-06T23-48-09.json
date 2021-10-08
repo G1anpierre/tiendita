@@ -1,0 +1,87 @@
+[
+  {
+    "ts": "2021-10-06T21:50:29.961Z",
+    "level": "error",
+    "error": {
+      "name": "BadRequest",
+      "entity": {
+        "metadata": {
+          "tags": [
+          ]
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "kv83g4w3zf0p"
+            }
+          },
+          "id": "2VehUgL6oJxgHCeP22DBfx",
+          "type": "Asset",
+          "createdAt": "2021-10-06T21:49:08.138Z",
+          "updatedAt": "2021-10-06T21:49:08.138Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "createdBy": {
+            "sys": {
+              "type": "Link",
+              "linkType": "User",
+              "id": "0yq0HUGRmWASD0oXwZXMqo"
+            }
+          },
+          "updatedBy": {
+            "sys": {
+              "type": "Link",
+              "linkType": "User",
+              "id": "0yq0HUGRmWASD0oXwZXMqo"
+            }
+          },
+          "publishedCounter": 0,
+          "version": 1
+        },
+        "fields": {
+          "title": {
+            "en-US": "Photo by Harry Cooke from Pexels"
+          },
+          "description": {
+            "en-US": "https://www.pexels.com/photo/alocasia-plant-with-green-leaves-on-blue-background-6805804/"
+          },
+          "file": {
+            "en-US": {
+              "upload": "https://images.ctfassets.net/t888he5mrnzj/2VehUgL6oJxgHCeP22DBfx/ef6bff5570f94eafe57429ba9eaddeaa/pexels-harry-cooke-6805804.jpg",
+              "fileName": "pexels-harry-cooke-6805804.jpg",
+              "contentType": "image/jpeg"
+            }
+          }
+        }
+      },
+      "data": {
+        "status": 400,
+        "statusText": "Bad Request",
+        "message": "File has already been processed.",
+        "details": {
+        },
+        "request": {
+          "url": "/spaces/kv83g4w3zf0p/environments/master/assets/2VehUgL6oJxgHCeP22DBfx/files/en-US/process",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": "Bearer ...SyP8w",
+            "user-agent": "node.js/v14.17.5",
+            "Accept-Encoding": "gzip",
+            "X-Contentful-Version": 1
+          },
+          "method": "put",
+          "payloadData": null
+        },
+        "requestId": "f88a028cbf1ecc78542eb08f56636d76"
+      }
+    }
+  }
+]
