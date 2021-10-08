@@ -4,14 +4,20 @@ import React from 'react'
 import type {AppProps} from 'next/app'
 import {AppStateProvider} from '../context'
 import {SessionProvider} from 'next-auth/react'
+import ThemeWrapper from '@components/ThemeWrapper'
+import Layout from '@components/layout'
 
 function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <AppStateProvider>
-        <Component {...pageProps} />
-      </AppStateProvider>
-    </SessionProvider>
+    <ThemeWrapper>
+      <SessionProvider session={session}>
+        <AppStateProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </AppStateProvider>
+      </SessionProvider>
+    </ThemeWrapper>
   )
 }
 export default MyApp

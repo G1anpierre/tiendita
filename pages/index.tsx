@@ -47,43 +47,31 @@ export async function getStaticProps() {
 }
 
 const Home: React.FC<HomeProps> = ({data, data2}) => {
-  // const [state, dispatch] = React.useReducer(reducer, initialState)
-
   return (
     <>
-      {/* <AppContext.Provider value={{state, dispatch}}> */}
-      <div className="home">
-        <Header />
-        <div className="main">
-          {/* Ofertas */}
-          <section className="ofertas">
-            <h1 className="ofertas__title">Ofertas</h1>
-            <div className="ofertas__cards">
-              {data.map((product: ProductType) => (
-                <Card product={product} key={product.id} />
-              ))}
-            </div>
-          </section>
-
-          {/* Populars */}
-          <section className="populars">
-            <h1 className="populars__title">Los mas populares</h1>
-            <div className="populars__cards">
-              {data2.map((product: ProductType) => (
-                <Card product={product} key={product.id} />
-              ))}
-            </div>
-          </section>
-        </div>
-        <footer className="footer">footer</footer>
+      <div className="hero">
+        !Adquiere todos tus productos favoritos al mejor precio!
       </div>
-      {/* </AppContext.Provider> */}
+      <div className="main">
+        <section className="ofertas">
+          <h1 className="ofertas__title">Ofertas</h1>
+          <div className="ofertas__cards">
+            {data.map((product: ProductType) => (
+              <Card product={product} key={product.id} />
+            ))}
+          </div>
+        </section>
+        <section className="populars">
+          <h1 className="populars__title">Los mas populares</h1>
+          <div className="populars__cards">
+            {data2.map((product: ProductType) => (
+              <Card product={product} key={product.id} />
+            ))}
+          </div>
+        </section>
+      </div>
       <style jsx>
         {`
-          .home {
-            padding: 0 15px;
-          }
-
           .ofertas,
           .populars {
             background-color: white;

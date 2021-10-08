@@ -5,11 +5,15 @@ import DrawerContainer from '@components/drawer-container'
 import ListCartProducts from '@components/list'
 import CartEmpty from '@components/cart-empty'
 import {useSession, signIn, signOut} from 'next-auth/react'
+import {useRouter} from 'next/router'
 
 const Header: React.FC = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
   const {numberOfCartElements} = useAppState()
   const {data: session, status} = useSession()
+  const router = useRouter()
+
+  console.log('router: ', router)
 
   const handleOpenDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen)
@@ -30,21 +34,22 @@ const Header: React.FC = () => {
               Sign In
             </div>
           )}
-          <div className="cart-info" onClick={handleOpenDrawer}>
-            <span className="cart-info__icon">
-              <Image
-                src="/images/shopping-cart.svg"
-                alt="shopping-cart"
-                height={20}
-                width={20}
-              />
-            </span>
-            <span className="cart-info__quantity">{numberOfCartElements}</span>
-          </div>
+          {router.asPath !== '/payment/card' && (
+            <div className="cart-info" onClick={handleOpenDrawer}>
+              <span className="cart-info__icon">
+                <Image
+                  src="/images/shopping-cart.svg"
+                  alt="shopping-cart"
+                  height={20}
+                  width={20}
+                />
+              </span>
+              <span className="cart-info__quantity">
+                {numberOfCartElements}
+              </span>
+            </div>
+          )}
         </nav>
-        <div className="hero">
-          !Adquiere todos tus productos favoritos al mejor precio!
-        </div>
       </header>
       <DrawerContainer
         drawerIsOpen={drawerIsOpen}
@@ -69,7 +74,7 @@ const Header: React.FC = () => {
         .logo {
           grid-area: logo;
           font: italic 900 22px/16px Inter;
-          color: #fc462d;
+          color: var(--tomato);
           cursor: pointer;
         }
 
@@ -83,7 +88,7 @@ const Header: React.FC = () => {
           grid-area: cart-info;
           justify-self: end;
           padding: 8px 25px;
-          background-color: #0ac763;
+          background-color: var(--green);
           border-radius: 8px;
           display: flex;
           align-items: center;
