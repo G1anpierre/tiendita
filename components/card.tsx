@@ -56,7 +56,7 @@ const Card: React.FC<CardProps> = ({product}) => {
           <div className="card__title">{product.title}</div>
         </div>
         <Button callback={() => handleAddProduct(product, openNotification)}>
-          Agragar
+          Agregar
         </Button>
       </div>
       <style jsx>{`

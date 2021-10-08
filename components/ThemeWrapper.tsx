@@ -15,6 +15,12 @@ const ThemeWrapper: React.FC<ThemeWrapperProps> = ({children}) => {
           --tomato: #fc462d;
           --green: #0ac763;
         }
+
+        body {
+          font-family: Poppins;
+          margin: 0;
+          padding: 0;
+        }
       `}</style>
     </>
   )
