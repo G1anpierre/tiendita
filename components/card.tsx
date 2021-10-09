@@ -47,8 +47,8 @@ const Card: React.FC<CardProps> = ({product}) => {
             alt={product.title}
             height={50}
             width={50}
-            layout="responsive"
-            className="product-image"
+            layout="fill"
+            objectFit="scale-down"
           />
         </div>
         <div className="card__text-info">
@@ -56,18 +56,25 @@ const Card: React.FC<CardProps> = ({product}) => {
           <div className="card__title">{product.title}</div>
         </div>
         <Button callback={() => handleAddProduct(product, openNotification)}>
-          Agragar
+          Agregar
         </Button>
       </div>
       <style jsx>{`
         .card {
           display: grid;
           grid-template-column: auto;
-          grid-template-rows: 1fr 0.65fr auto;
+          grid-template-rows: 200px 150px 50px;
         }
 
         .card__subtitle {
           margin-bottom: 16px;
+        }
+
+        .card__image-container {
+          position: relative;
+          width: 100%;
+          height: auto;
+          object-fit: cover;
         }
 
         .button-add-cart {
@@ -78,11 +85,6 @@ const Card: React.FC<CardProps> = ({product}) => {
           padding: 10px 0;
           font: normal 400 14px/16px Poppins;
           cursor: pointer;
-        }
-
-        :global(.product-image) {
-          width: 100%;
-          he
         }
       `}</style>
     </>
