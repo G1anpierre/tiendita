@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import {useAppState} from '@stateHelpers/useState'
 import DrawerContainer from '@components/drawer-container'
 import ListCartProducts from '@components/list'
@@ -21,7 +22,11 @@ const Header: React.FC = () => {
     <>
       <header className="header">
         <nav className="navbar">
-          <div className="logo">Tiendita</div>
+          <Link href="/">
+            <a>
+              <div className="logo">Tiendita</div>
+            </a>
+          </Link>
           <div className="place">Mexico City Reforma</div>
           {session ? (
             <div className="user login" onClick={() => signOut()}>
