@@ -24,8 +24,8 @@ const Header: React.FC = () => {
           <div className="logo">Tiendita</div>
           <div className="place">Mexico City Reforma</div>
           {session ? (
-            <div className="user" onClick={() => signOut()}>
-              Hello Gianpierre, Sign Out
+            <div className="user login" onClick={() => signOut()}>
+              {session?.user?.name}, Sign Out
             </div>
           ) : (
             <div className="user" onClick={() => signIn()}>
