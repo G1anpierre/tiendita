@@ -1,15 +1,18 @@
 import React, {useState} from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import {useAppState} from '@stateHelpers/useState'
 import DrawerContainer from '@components/drawer-container'
 import ListCartProducts from '@components/list'
 import CartEmpty from '@components/cart-empty'
 import {useSession, signIn, signOut} from 'next-auth/react'
+import {useRouter} from 'next/router'
 
 const Header: React.FC = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
   const {numberOfCartElements} = useAppState()
   const {data: session, status} = useSession()
+  const router = useRouter()
 
   const handleOpenDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen)
@@ -19,32 +22,37 @@ const Header: React.FC = () => {
     <>
       <header className="header">
         <nav className="navbar">
-          <div className="logo">Tiendita</div>
+          <Link href="/">
+            <a>
+              <div className="logo">Tiendita</div>
+            </a>
+          </Link>
           <div className="place">Mexico City Reforma</div>
           {session ? (
-            <div className="user" onClick={() => signOut()}>
-              Hello Gianpierre, Sign Out
+            <div className="user login" onClick={() => signOut()}>
+              {session?.user?.name}, Sign Out
             </div>
           ) : (
             <div className="user" onClick={() => signIn()}>
               Sign In
             </div>
           )}
-          <div className="cart-info" onClick={handleOpenDrawer}>
-            <span className="cart-info__icon">
-              <Image
-                src="/images/shopping-cart.svg"
-                alt="shopping-cart"
-                height={20}
-                width={20}
-              />
-            </span>
-            <span className="cart-info__quantity">{numberOfCartElements}</span>
-          </div>
+          {router.asPath !== '/payment/card' && (
+            <div className="cart-info" onClick={handleOpenDrawer}>
+              <span className="cart-info__icon">
+                <Image
+                  src="/images/shopping-cart.svg"
+                  alt="shopping-cart"
+                  height={20}
+                  width={20}
+                />
+              </span>
+              <span className="cart-info__quantity">
+                {numberOfCartElements}
+              </span>
+            </div>
+          )}
         </nav>
-        <div className="hero">
-          !Adquiere todos tus productos favoritos al mejor precio!
-        </div>
       </header>
       <DrawerContainer
         drawerIsOpen={drawerIsOpen}
@@ -69,7 +77,7 @@ const Header: React.FC = () => {
         .logo {
           grid-area: logo;
           font: italic 900 22px/16px Inter;
-          color: #fc462d;
+          color: var(--tomato);
           cursor: pointer;
         }
 
@@ -83,7 +91,7 @@ const Header: React.FC = () => {
           grid-area: cart-info;
           justify-self: end;
           padding: 8px 25px;
-          background-color: #0ac763;
+          background-color: var(--green);
           border-radius: 8px;
           display: flex;
           align-items: center;
