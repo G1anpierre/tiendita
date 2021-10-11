@@ -45,8 +45,6 @@ const Card: React.FC<CardProps> = ({product}) => {
           <Image
             src={product.image}
             alt={product.title}
-            height={50}
-            width={50}
             layout="fill"
             objectFit="scale-down"
           />

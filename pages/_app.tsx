@@ -1,7 +1,8 @@
+import App from 'next/app'
 import 'antd/dist/antd.css'
 import '../styles/globals.css'
 import React from 'react'
-import type {AppProps} from 'next/app'
+import type {AppProps, AppContext} from 'next/app'
 import {AppStateProvider} from '../context'
 import {SessionProvider} from 'next-auth/react'
 import ThemeWrapper from '@components/ThemeWrapper'
@@ -20,4 +21,5 @@ function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {
     </ThemeWrapper>
   )
 }
+
 export default MyApp
