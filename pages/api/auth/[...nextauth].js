@@ -6,7 +6,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import {
   NEXT_PUBLIC_GITHUB_CLIENT_ID,
   NEXT_PUBLIC_GITHUB_CLIENT_SECRET,
-} from './config'
+} from 'config'
 
 export default NextAuth({
   // Configure one or more authentication providers
