@@ -8,13 +8,17 @@ type LayoutProps = {
 }
 
 const Layout: React.FC<LayoutProps> = ({children}) => {
+  const router = useRouter()
+
   return (
     <>
       <div className="layout">
         <Header />
         {children}
         <footer className="footer">
-          <a href="/cookie-declaration">cookie declaration</a>
+          <span onClick={() => router.push('/cookie-declaration')}>
+            cookie declaration
+          </span>
         </footer>
       </div>
       <style jsx>{`
