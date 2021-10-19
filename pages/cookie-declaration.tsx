@@ -4,9 +4,7 @@ import {useRouter} from 'next/router'
 const CookieDeclaration = () => {
   const router = useRouter()
 
-  useEffect(() => {
-    router.reload()
-  }, [])
+  router.reload()
 
   return (
     <div>
