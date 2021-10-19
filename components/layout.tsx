@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '@components/header'
 import Link from 'next/link'
+import {useRouter} from 'next/router'
 
 type LayoutProps = {
   children: React.ReactNode
@@ -13,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
         <Header />
         {children}
         <footer className="footer">
-          <Link href="/cookie-declaration">cookie declaration</Link>
+          <a href="/cookie-declaration">cookie declaration</a>
         </footer>
       </div>
       <style jsx>{`
