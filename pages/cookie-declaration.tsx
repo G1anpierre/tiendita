@@ -6,7 +6,7 @@ const CookieDeclaration = () => {
 
   useEffect(() => {
     router.reload()
-  }, [])
+  }, [router])
 
   return (
     <div>
