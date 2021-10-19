@@ -1,13 +1,6 @@
 import React, {useEffect} from 'react'
-import {useRouter} from 'next/router'
 
 const CookieDeclaration = () => {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.reload()
-  }, [router])
-
   return (
     <div>
       <h1>Cookie Declaration</h1>
