@@ -4,8 +4,6 @@ import {useRouter} from 'next/router'
 const CookieDeclaration = () => {
   const router = useRouter()
 
-  router.reload()
-
   return (
     <div>
       <h1>Cookie Declaration</h1>

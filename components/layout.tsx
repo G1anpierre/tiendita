@@ -23,6 +23,12 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
   //   })
   // }, [])
 
+  useEffect(() => {
+    if (router.asPath === '/cookie-declaration') {
+      router.prefetch('/cookie-declaration')
+    }
+  }, [])
+
   return (
     <>
       <div className="layout">
