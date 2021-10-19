@@ -14,7 +14,7 @@ const CookieDeclaration = () => {
         ></script>
       </Head>
       <div>
-        <h1>Cookie Declaration</h1>
+        <h1>Cookie Declaration 1</h1>
       </div>
     </>
   )
