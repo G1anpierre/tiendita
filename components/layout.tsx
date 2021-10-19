@@ -10,25 +10,6 @@ type LayoutProps = {
 const Layout: React.FC<LayoutProps> = ({children}) => {
   const router = useRouter()
 
-  // useEffect(() => {
-  //   router.beforePopState(({ url, as, options }) => {
-  //     // I only want to allow these two routes!
-  //     if (as !== '/' && as !== '/cookie-declaration') {
-  //       // Have SSR render bad routes as a 404.
-  //       window.location.href = as
-  //       return false
-  //     }
-
-  //     return true
-  //   })
-  // }, [])
-
-  useEffect(() => {
-    if (router.asPath === '/cookie-declaration') {
-      router.prefetch('/cookie-declaration')
-    }
-  }, [])
-
   return (
     <>
       <div className="layout">
