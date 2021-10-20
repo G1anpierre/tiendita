@@ -9,7 +9,20 @@ const CookieDeclaration = () => {
     <>
       <h1>Cookie Declaration</h1>
       <div id="policy-script">Here is going to come code</div>
-      <Script
+      <Script id="show-banner" strategy="afterInteractive">
+        {`
+        window.onload = function() {
+          const script = document.createElement('script')
+          script.src =
+            'https://consent.cookiebot.com/7b132f08-cd18-475c-a995-2a7991985675/cd.js'
+          script.setAttribute('id', 'CookieDeclaration')
+          console.log('script: ', script)
+          console.log('policy-script: ', document.getElementById('policy-script'))
+          document.getElementById('policy-script')?.appendChild(script)
+        }
+        `}
+      </Script>
+      {/* <Script
         strategy="afterInteractive"
         onLoad={() => {
           console.log('hello world')
@@ -20,7 +33,7 @@ const CookieDeclaration = () => {
           console.log('script: ', script)
           document.getElementById('policy-script')?.appendChild(script)
         }}
-      />
+      /> */}
     </>
   )
 }
