@@ -5,6 +5,7 @@ import {useAppMutations} from '@stateHelpers/useDispatch'
 import {useAppState} from '@stateHelpers/useState'
 import {notification} from 'antd'
 import Button from '@components/button'
+import {selectProduct} from '../lib/gtm'
 
 export type CardProps = {
   product: ProductType
@@ -30,6 +31,7 @@ const Card: React.FC<CardProps> = ({product}) => {
     product: ProductType,
     callback: (isSuccess: boolean) => void,
   ) => {
+    selectProduct(product)
     if (foundElement(product.id)) {
       callback(true)
     } else {
