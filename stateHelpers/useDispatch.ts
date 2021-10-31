@@ -2,7 +2,7 @@ import React from 'react'
 import {AppDispatchContext} from '../context'
 import {ADD_PRODUCT, EMPTY_CART, ADD_QUANTITY} from './stateVariables'
 
-export const useAppMutations = () => {
+export const useCartMutations = () => {
   const dispatch = React.useContext(AppDispatchContext)
 
   const addProduct = (payload: any) =>

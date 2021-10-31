@@ -1,6 +1,10 @@
 import React from 'react'
 import Card from '@components/card'
 import Header from '@components/header'
+import {useAppState} from '@stateHelpers/useState'
+import {useProductsMutations} from '../context'
+import {useProductsState} from 'context/productsContext'
+import {ProductItemType} from 'types/product'
 
 export type RatingType = {
   count: number
@@ -16,15 +20,20 @@ export type ProductType = {
   price: number
   rating: RatingType
   quantity?: number
-}
+} & {quantity: number; generalSize: string[]}
 
 export type ProductsType = {
   data: ProductType[]
 }
 
 export type HomeProps = {
-  data: ProductType[]
-  data2: ProductType[]
+  generalProducts: ProductType[]
+  jouleryProducts: ProductType[]
+}
+
+export type DataToAdd = {
+  quantity: number
+  generalSize: string[]
 }
 
 export async function getStaticProps() {
@@ -32,21 +41,60 @@ export async function getStaticProps() {
   const res2 = await fetch(
     `https://fakestoreapi.com/products/category/jewelery`,
   )
-  const data = await res.json()
-  const data2 = await res2.json()
+  const generalProducts = await res.json()
+  const jouleryProducts = await res2.json()
 
-  if (!data && !data2) {
+  if (!generalProducts && !jouleryProducts) {
     return {
       notFound: true,
     }
   }
 
   return {
-    props: {data, data2}, // will be passed to the page component as props
+    props: {generalProducts, jouleryProducts}, // will be passed to the page component as props
   }
 }
 
-const Home: React.FC<HomeProps> = ({data, data2}) => {
+const Home: React.FC<HomeProps> = ({generalProducts, jouleryProducts}) => {
+  const {allProducts, allJouleryProducts} = useProductsState()
+  const {loadAllProducts, loadJouleryProducts} = useProductsMutations()
+
+  const dataToAdd = {
+    quantity: 1,
+    generalSize: ['extra small', 'small', 'medium', 'large', 'extra large'],
+  }
+
+  const updateData = (
+    data: ProductItemType[],
+    data2: ProductItemType[],
+    dataToAdd: DataToAdd,
+  ) => {
+    const generalProductsUpdate = data?.map(singleData => ({
+      ...singleData,
+      ...dataToAdd,
+    }))
+    const jouleryProductsUpdate = data2?.map(singleData => ({
+      ...singleData,
+      ...dataToAdd,
+    }))
+
+    return {
+      generalProductsUpdate,
+      jouleryProductsUpdate,
+    }
+  }
+
+  const {generalProductsUpdate, jouleryProductsUpdate} = updateData(
+    allProducts,
+    allJouleryProducts,
+    dataToAdd,
+  )
+
+  React.useEffect(() => {
+    loadAllProducts(generalProducts)
+    loadJouleryProducts(jouleryProducts)
+  }, [])
+
   return (
     <>
       <div className="hero">
@@ -56,7 +104,7 @@ const Home: React.FC<HomeProps> = ({data, data2}) => {
         <section className="ofertas">
           <h1 className="ofertas__title">Ofertas</h1>
           <div className="ofertas__cards">
-            {data.map((product: ProductType) => (
+            {generalProductsUpdate?.map((product: ProductType) => (
               <Card product={product} key={product.id} />
             ))}
           </div>
@@ -64,7 +112,7 @@ const Home: React.FC<HomeProps> = ({data, data2}) => {
         <section className="populars">
           <h1 className="populars__title">Los mas populares</h1>
           <div className="populars__cards">
-            {data2.map((product: ProductType) => (
+            {jouleryProductsUpdate?.map((product: ProductType) => (
               <Card product={product} key={product.id} />
             ))}
           </div>
@@ -88,7 +136,10 @@ const Home: React.FC<HomeProps> = ({data, data2}) => {
           .populars__cards {
             display: grid;
             grid-gap: 10px;
-            grid-template-columns: repeat(${data2.length}, 175px);
+            grid-template-columns: repeat(
+              ${jouleryProductsUpdate?.length},
+              175px
+            );
             overflow-x: auto;
           }
 

@@ -1,12 +1,12 @@
 import React from 'react'
 import {List, InputNumber, Avatar, Spin} from 'antd'
 import {ProductType} from '@pages/index'
-import {useAppMutations} from '@stateHelpers/useDispatch'
+import {useCartMutations} from '@stateHelpers/useDispatch'
 import {useAppState} from '@stateHelpers/useState'
 
 const ListCartProducts = () => {
   const {cart} = useAppState()
-  const {addQuantity} = useAppMutations()
+  const {addQuantity} = useCartMutations()
 
   const onChange = (value: number, id: number) => {
     addQuantity({value, id})
@@ -29,7 +29,8 @@ const ListCartProducts = () => {
                 size="small"
                 min={1}
                 max={100000}
-                defaultValue={item.quantity}
+                value={item.quantity}
+                defaultValue={1}
                 onChange={value => onChange(value, item.id)}
               />
             </div>

@@ -1,0 +1,130 @@
+import React, {Dispatch, useReducer} from 'react'
+import {productsInitialState} from '../state'
+
+export type InitialProductsStateType = {
+  products: ProductItemType[]
+  jouleryProducts: ProductItemType[]
+}
+
+export type RatingItemType = {
+  count: number
+  rate: number
+}
+
+export type ProductItemType = {
+  id: number
+  title: string
+  category: string
+  description: string
+  image: string
+  price: number
+  rating: RatingItemType
+  quantity?: number
+}
+
+export type ProductsAction = {
+  type: 'LOAD_ALL_PRODUCTS' | 'LOAD_JOULERY_PRODUCTS'
+  items: ProductItemType[]
+}
+
+// export type ProductType = {
+//   [key: string]: ProductItemType
+// }
+
+// export type ProductsState = {
+//   [key: string]: ProductType
+// }
+
+const defaultProductsState = {} as InitialProductsStateType
+
+const ProductsContext = React.createContext(defaultProductsState)
+const ProductsDispatch = React.createContext(
+  (() => {}) as Dispatch<ProductsAction>,
+)
+
+export const ProductsProvider = ({children}: {children: React.ReactNode}) => {
+  const [state, dispatch] = useReducer(productsReducer, defaultProductsState)
+
+  return (
+    <ProductsContext.Provider value={state}>
+      <ProductsDispatch.Provider value={dispatch}>
+        {children}
+      </ProductsDispatch.Provider>
+    </ProductsContext.Provider>
+  )
+}
+
+// Reducer
+
+const productsReducer = (
+  state: InitialProductsStateType,
+  action: ProductsAction,
+) => {
+  switch (action.type) {
+    case 'LOAD_ALL_PRODUCTS': {
+      return {
+        ...state,
+        products: action.items,
+      }
+    }
+    case 'LOAD_JOULERY_PRODUCTS': {
+      return {
+        ...state,
+        jouleryProducts: action.items,
+      }
+    }
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`)
+  }
+}
+
+// Consume Dispatch
+
+export const useProductsMutations = () => {
+  const dispatch = React.useContext(ProductsDispatch)
+
+  const loadAllProducts = (items: ProductItemType[]) => {
+    dispatch({
+      type: 'LOAD_ALL_PRODUCTS',
+      items,
+    })
+  }
+
+  const loadJouleryProducts = (items: ProductItemType[]) => {
+    dispatch({
+      type: 'LOAD_JOULERY_PRODUCTS',
+      items,
+    })
+  }
+
+  return {
+    loadAllProducts,
+    loadJouleryProducts,
+  }
+}
+
+// Consume the State
+
+export const useProductsState = () => {
+  const productState = React.useContext(ProductsContext)
+
+  const {products, jouleryProducts} = productState
+
+  const allProducts = getProducts(products)
+  const allJouleryProducts = getJouleryProducts(jouleryProducts)
+
+  return {
+    allProducts,
+    allJouleryProducts,
+  }
+}
+
+// utilities
+
+const getProducts = (products: ProductItemType[]) => {
+  return products
+}
+
+const getJouleryProducts = (products: ProductItemType[]) => {
+  return products
+}

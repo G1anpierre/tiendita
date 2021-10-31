@@ -20,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({children, callback}) => {
           padding: 10px 0;
           font: normal 400 14px/16px Poppins;
           cursor: pointer;
+          width: 100%;
         }
 
         .button.primary {

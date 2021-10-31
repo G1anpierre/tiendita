@@ -3,8 +3,9 @@ import 'antd/dist/antd.css'
 import '../styles/globals.css'
 import Script from 'next/script'
 import React, {useEffect} from 'react'
-import type {AppProps, AppContext} from 'next/app'
-import {AppStateProvider} from '../context'
+import type {AppProps} from 'next/app'
+import {CartStateProvider} from '../context'
+import {ProductsProvider} from '../context'
 import {SessionProvider} from 'next-auth/react'
 import ThemeWrapper from '@components/ThemeWrapper'
 import Layout from '@components/layout'
@@ -42,11 +43,13 @@ function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {
       />
       <ThemeWrapper>
         <SessionProvider session={session}>
-          <AppStateProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </AppStateProvider>
+          <ProductsProvider>
+            <CartStateProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </CartStateProvider>
+          </ProductsProvider>
         </SessionProvider>
       </ThemeWrapper>
     </>
