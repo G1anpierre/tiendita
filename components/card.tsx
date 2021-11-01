@@ -51,7 +51,6 @@ const Card: React.FC<CardProps> = ({product}) => {
   }
 
   const onChange = (value: number, id: number) => {
-    console.debug({value, id})
     addQuantity({value, id})
   }
 

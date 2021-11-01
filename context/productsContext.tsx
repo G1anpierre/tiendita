@@ -22,10 +22,15 @@ export type ProductItemType = {
   quantity?: number
 }
 
-export type ProductsAction = {
-  type: 'LOAD_ALL_PRODUCTS' | 'LOAD_JOULERY_PRODUCTS'
-  items: ProductItemType[]
-}
+export type ProductsAction =
+  | {
+      type: 'LOAD_ALL_PRODUCTS' | 'LOAD_JOULERY_PRODUCTS'
+      items: ProductItemType[]
+    }
+  | {
+      type: 'ADD_ALL_PRODUCTS_QUANTITY'
+      productInfo?: any
+    }
 
 // export type ProductType = {
 //   [key: string]: ProductItemType
@@ -73,8 +78,24 @@ const productsReducer = (
         jouleryProducts: action.items,
       }
     }
+
+    case 'ADD_ALL_PRODUCTS_QUANTITY': {
+      const {id, value} = action.productInfo
+      return {
+        ...state,
+        cart: state.products.map((element: ProductItemType) => {
+          if (element.id === id) {
+            return {
+              ...element,
+              quantity: value,
+            }
+          }
+          return element
+        }),
+      }
+    }
     default:
-      throw new Error(`Unhandled action type: ${action.type}`)
+      throw new Error(`Unhandled action type: `)
   }
 }
 
@@ -97,9 +118,16 @@ export const useProductsMutations = () => {
     })
   }
 
+  const addAllProductsQuantity = (productInfo: any) =>
+    dispatch({
+      type: 'ADD_ALL_PRODUCTS_QUANTITY',
+      productInfo,
+    })
+
   return {
     loadAllProducts,
     loadJouleryProducts,
+    addAllProductsQuantity,
   }
 }
 

@@ -95,6 +95,9 @@ const Home: React.FC<HomeProps> = ({generalProducts, jouleryProducts}) => {
     loadJouleryProducts(jouleryProducts)
   }, [])
 
+  console.debug('allProducts :', generalProductsUpdate)
+  console.debug('jouleryProduct: ', jouleryProductsUpdate)
+
   return (
     <>
       <div className="hero">
