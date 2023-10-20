@@ -8,7 +8,7 @@ const ListCartProducts = () => {
   const {cart} = useAppState()
   const {addQuantity} = useCartMutations()
 
-  const onChange = (value: number, id: number) => {
+  const onChange = (value: number | null, id: number) => {
     addQuantity({value, id})
   }
 
