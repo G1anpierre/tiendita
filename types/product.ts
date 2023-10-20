@@ -18,3 +18,21 @@ export type ProductType = {
   rating: RatingType
   quantity?: number
 }
+
+// AllProducts Type
+
+export type RatingItemType = {
+  count: number
+  rate: number
+}
+
+export type ProductItemType = {
+  id: number
+  title: string
+  category: string
+  description: string
+  image: string
+  price: number
+  rating: RatingItemType
+  quantity?: number
+}

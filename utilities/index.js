@@ -21,13 +21,21 @@ const findElement = state => {
   return innerFunction
 }
 
+const findSpecificProduct = state => {
+  const innerFunction = productId => {
+    return state.filter(product => product.id === productId)
+  }
+  return innerFunction
+}
+
 const cartIsEmpty = state => {
-  return state.length === 0
+  return state?.length === 0
 }
 
 export {
   calculateNumberOfCartElements,
   calculateTotalPrice,
+  findSpecificProduct,
   findElement,
   cartIsEmpty,
 }

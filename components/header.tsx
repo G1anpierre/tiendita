@@ -23,9 +23,7 @@ const Header: React.FC = () => {
       <header className="header">
         <nav className="navbar">
           <Link href="/">
-            <a>
-              <div className="logo">Tiendita</div>
-            </a>
+            <div className="logo">Tiendita</div>
           </Link>
           <div className="place">Mexico City Reforma</div>
           {session ? (

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Drawer, Button, Space} from 'antd'
-import {useAppMutations} from '@stateHelpers/useDispatch'
+import {useCartMutations} from '@stateHelpers/useDispatch'
 import {useAppState} from '@stateHelpers/useState'
 import Link from 'next/link'
 
@@ -16,7 +16,7 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
   handleOpenDrawer,
 }) => {
   const {numberOfCartElements, totalPrice, isDisable} = useAppState()
-  const {emptyCart} = useAppMutations()
+  const {emptyCart} = useCartMutations()
 
   const handleEmptyCart = () => {
     emptyCart()
