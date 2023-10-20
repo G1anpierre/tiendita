@@ -40,7 +40,10 @@ export type ProductsAction =
 //   [key: string]: ProductType
 // }
 
-const defaultProductsState = {} as InitialProductsStateType
+const defaultProductsState = {
+  products: [],
+  jouleryProducts: [],
+} as InitialProductsStateType
 
 const ProductsContext = React.createContext(defaultProductsState)
 const ProductsDispatch = React.createContext(

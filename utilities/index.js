@@ -29,7 +29,7 @@ const findSpecificProduct = state => {
 }
 
 const cartIsEmpty = state => {
-  return state.length === 0
+  return state?.length === 0
 }
 
 export {
