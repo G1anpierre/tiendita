@@ -27,8 +27,8 @@ export type ProductsType = {
 }
 
 export type HomeProps = {
-  generalProducts: ProductType[]
-  jouleryProducts: ProductType[]
+  generalProductsUpdate: ProductType[]
+  jouleryProductsUpdate: ProductType[]
 }
 
 export type DataToAdd = {
@@ -72,23 +72,25 @@ export async function getStaticProps() {
     }
   }
 
+  const {generalProductsUpdate, jouleryProductsUpdate} = updateData(
+    generalProducts,
+    jouleryProducts,
+  )
+
   return {
-    props: {generalProducts, jouleryProducts}, // will be passed to the page component as props
+    props: {generalProductsUpdate, jouleryProductsUpdate}, // will be passed to the page component as props
   }
 }
 
-const Home: React.FC<HomeProps> = ({generalProducts, jouleryProducts}) => {
-  const {allProducts, allJouleryProducts} = useProductsState()
+const Home: React.FC<HomeProps> = ({
+  generalProductsUpdate,
+  jouleryProductsUpdate,
+}) => {
   const {loadAllProducts, loadJouleryProducts} = useProductsMutations()
 
-  const {generalProductsUpdate, jouleryProductsUpdate} = updateData(
-    allProducts,
-    allJouleryProducts,
-  )
-
   React.useEffect(() => {
-    loadAllProducts(generalProducts)
-    loadJouleryProducts(jouleryProducts)
+    loadAllProducts(generalProductsUpdate)
+    loadJouleryProducts(jouleryProductsUpdate)
   }, [])
 
   return (

@@ -141,21 +141,8 @@ export const useProductsState = () => {
 
   const {products, jouleryProducts} = productState
 
-  const allProducts = getProducts(products)
-  const allJouleryProducts = getJouleryProducts(jouleryProducts)
-
   return {
-    allProducts,
-    allJouleryProducts,
+    allProducts: products,
+    allJouleryProducts: jouleryProducts,
   }
-}
-
-// utilities
-
-const getProducts = (products: ProductItemType[]) => {
-  return products
-}
-
-const getJouleryProducts = (products: ProductItemType[]) => {
-  return products
 }
