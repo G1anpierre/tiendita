@@ -1,10 +1,10 @@
-import {ProductType} from '../types/product'
+import {ProductType} from '../../types/product'
 import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
   ADD_QUANTITY,
   EMPTY_CART,
-} from '../stateHelpers/stateVariables'
+} from '../../stateHelpers/stateVariables'
 
 export type InitialStateType = {
   cart: []

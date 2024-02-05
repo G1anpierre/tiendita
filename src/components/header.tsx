@@ -1,12 +1,14 @@
+'use client'
+
 import React, {useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {useCartState} from '@stateHelpers/useCartState'
-import DrawerContainer from '@components/drawer-container'
-import ListCartProducts from '@components/list'
-import CartEmpty from '@components/cart-empty'
+import DrawerContainer from 'src/components/drawer-container'
+import ListCartProducts from 'src/components/list'
+import CartEmpty from 'src/components/cart-empty'
 import {useSession, signIn, signOut} from 'next-auth/react'
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/navigation'
 
 const Header: React.FC = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
@@ -35,7 +37,7 @@ const Header: React.FC = () => {
               Sign In
             </div>
           )}
-          {router.asPath !== '/payment/card' && (
+          {/* {router.asPath !== '/payment/card' && (
             <div className="cart-info" onClick={handleOpenDrawer}>
               <span className="cart-info__icon">
                 <Image
@@ -49,7 +51,7 @@ const Header: React.FC = () => {
                 {numberOfCartElements}
               </span>
             </div>
-          )}
+          )} */}
         </nav>
       </header>
       <DrawerContainer

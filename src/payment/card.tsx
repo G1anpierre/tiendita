@@ -2,7 +2,7 @@ import React from 'react'
 import {useRouter} from 'next/router'
 import {Row, Col, Layout} from 'antd'
 import {PageHeader} from '@ant-design/pro-layout'
-import ListCartProducts from '@components/list'
+import ListCartProducts from 'src/components/list'
 import {LeftCircleFilled} from '@ant-design/icons'
 const {Content} = Layout
 

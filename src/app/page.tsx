@@ -1,30 +1,11 @@
+// 'use client'
 import React from 'react'
-import Card from '@components/card'
-import Header from '@components/header'
+import Card from 'src/components/card'
+import Header from 'src/components/header'
 import {useCartState} from '@stateHelpers/useCartState'
 import {useProductsMutations} from '../context'
-import {useProductsState} from 'context/productsContext'
+import {useProductsState} from 'src/context/productsContext'
 import {ProductItemType} from 'types/product'
-
-export type RatingType = {
-  count: number
-  rate: number
-}
-
-export type ProductType = {
-  id: number
-  title: string
-  category: string
-  description: string
-  image: string
-  price: number
-  rating: RatingType
-  quantity?: number
-} & {quantity: number; generalSize: string[]}
-
-export type ProductsType = {
-  data: ProductType[]
-}
 
 export type HomeProps = {
   generalProductsUpdate: ProductType[]
@@ -58,7 +39,7 @@ const updateData = (data: ProductItemType[], data2: ProductItemType[]) => {
   }
 }
 
-export async function getStaticProps() {
+export async function getProducts() {
   const res = await fetch(`https://fakestoreapi.com/products?limit=15`)
   const res2 = await fetch(
     `https://fakestoreapi.com/products/category/jewelery`,
@@ -78,20 +59,20 @@ export async function getStaticProps() {
   )
 
   return {
-    props: {generalProductsUpdate, jouleryProductsUpdate}, // will be passed to the page component as props
+    generalProductsUpdate,
+    jouleryProductsUpdate, // will be passed to the page component as props
   }
 }
 
-const Home: React.FC<HomeProps> = ({
-  generalProductsUpdate,
-  jouleryProductsUpdate,
-}) => {
-  const {loadAllProducts, loadJouleryProducts} = useProductsMutations()
+const Home: React.FC<HomeProps> = async () => {
+  const {generalProductsUpdate, jouleryProductsUpdate} = await getProducts()
 
-  React.useEffect(() => {
-    loadAllProducts(generalProductsUpdate)
-    loadJouleryProducts(jouleryProductsUpdate)
-  }, [])
+  // const {loadAllProducts, loadJouleryProducts} = useProductsMutations()
+
+  // React.useEffect(() => {
+  //   loadAllProducts(generalProductsUpdate)
+  //   loadJouleryProducts(jouleryProductsUpdate)
+  // }, [])
 
   return (
     <>
@@ -116,7 +97,7 @@ const Home: React.FC<HomeProps> = ({
           </div>
         </section>
       </div>
-      <style jsx>
+      {/* <style jsx>
         {`
           .ofertas,
           .populars {
@@ -178,7 +159,7 @@ const Home: React.FC<HomeProps> = ({
             }
           }
         `}
-      </style>
+      </style> */}
     </>
   )
 }

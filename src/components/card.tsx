@@ -1,10 +1,10 @@
+'use client'
 import React, {useState} from 'react'
 import Image from 'next/image'
-import {ProductType} from '@pages/index'
 import {useCartMutations} from '@stateHelpers/useCartDispatch'
 import {useCartState} from '@stateHelpers/useCartState'
 import {notification, Modal, Row, Col, Select, InputNumber} from 'antd'
-import Button from '@components/button'
+import Button from 'src/components/button'
 import {selectProduct} from '../lib/gtm'
 
 export type CardProps = {

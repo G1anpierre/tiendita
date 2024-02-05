@@ -6,7 +6,7 @@ import {
   findElement,
   cartIsEmpty,
 } from '../utilities'
-import {CartContext} from '../context'
+import {CartContext} from '../src/context'
 
 export const useCartState = () => {
   const appState = React.useContext(CartContext)

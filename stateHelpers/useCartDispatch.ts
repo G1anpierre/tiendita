@@ -1,5 +1,5 @@
 import React from 'react'
-import {CartDispatchContext} from '../context'
+import {CartDispatchContext} from '../src/context'
 import {ADD_PRODUCT, EMPTY_CART, ADD_QUANTITY} from './stateVariables'
 
 export const useCartMutations = () => {

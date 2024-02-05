@@ -1,6 +1,6 @@
 import React, {useReducer} from 'react'
 import {cartReducer, ActionType} from '../reducer'
-import {initialState} from '../state'
+import {initialState} from '../../state'
 
 export type InitialStateType = {
   cart: []

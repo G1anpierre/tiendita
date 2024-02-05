@@ -1,7 +1,9 @@
+'use client'
+
 import React, {useEffect} from 'react'
-import Header from '@components/header'
+import Header from 'src/components/header'
 import Link from 'next/link'
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/navigation'
 
 type LayoutProps = {
   children: React.ReactNode
