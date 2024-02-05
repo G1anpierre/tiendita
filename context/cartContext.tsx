@@ -1,5 +1,5 @@
 import React, {useReducer} from 'react'
-import {reducer, ActionType} from '../reducer'
+import {cartReducer, ActionType} from '../reducer'
 import {initialState} from '../state'
 
 export type InitialStateType = {
@@ -9,20 +9,20 @@ export type InitialStateType = {
 const defaultState = {} as InitialStateType
 
 export const CartContext = React.createContext(defaultState)
-export const AppDispatchContext = React.createContext(
+export const CartDispatchContext = React.createContext(
   (() => {}) as React.Dispatch<ActionType>,
 )
 
 export const CartStateProvider = ({children}: {children: React.ReactNode}) => {
   //@ts-ignore
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(cartReducer, initialState)
 
   return (
     <>
       <CartContext.Provider value={state}>
-        <AppDispatchContext.Provider value={dispatch}>
+        <CartDispatchContext.Provider value={dispatch}>
           {children}
-        </AppDispatchContext.Provider>
+        </CartDispatchContext.Provider>
       </CartContext.Provider>
     </>
   )

@@ -1,10 +1,14 @@
-import {CartContext, CartStateProvider, AppDispatchContext} from './cartContext'
+import {
+  CartContext,
+  CartStateProvider,
+  CartDispatchContext,
+} from './cartContext'
 import {ProductsProvider, useProductsMutations} from './productsContext'
 
 export {
   CartContext,
   CartStateProvider,
-  AppDispatchContext,
+  CartDispatchContext,
   ProductsProvider,
   useProductsMutations,
 }

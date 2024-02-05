@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import Image from 'next/image'
 import {ProductType} from '@pages/index'
-import {useCartMutations} from '@stateHelpers/useDispatch'
-import {useAppState} from '@stateHelpers/useState'
+import {useCartMutations} from '@stateHelpers/useCartDispatch'
+import {useCartState} from '@stateHelpers/useCartState'
 import {notification, Modal, Row, Col, Select, InputNumber} from 'antd'
 import Button from '@components/button'
 import {selectProduct} from '../lib/gtm'
@@ -13,7 +13,7 @@ export type CardProps = {
 
 const Card: React.FC<CardProps> = ({product}) => {
   const {addProduct, addQuantity} = useCartMutations()
-  const {isfoundElement, specificProduct} = useAppState()
+  const {isfoundElement, specificProduct} = useCartState()
   const [visible, setVisible] = useState(false)
   const {Option} = Select
 

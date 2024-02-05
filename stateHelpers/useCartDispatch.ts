@@ -1,9 +1,9 @@
 import React from 'react'
-import {AppDispatchContext} from '../context'
+import {CartDispatchContext} from '../context'
 import {ADD_PRODUCT, EMPTY_CART, ADD_QUANTITY} from './stateVariables'
 
 export const useCartMutations = () => {
-  const dispatch = React.useContext(AppDispatchContext)
+  const dispatch = React.useContext(CartDispatchContext)
 
   const addProduct = (payload: any) =>
     dispatch({

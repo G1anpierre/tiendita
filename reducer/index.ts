@@ -17,7 +17,7 @@ export type ActionType = {
   productInfo?: any
 }
 
-export const reducer = (state: InitialStateType, action: ActionType) => {
+export const cartReducer = (state: InitialStateType, action: ActionType) => {
   switch (action.type) {
     case ADD_PRODUCT:
       return {

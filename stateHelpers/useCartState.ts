@@ -8,7 +8,7 @@ import {
 } from '../utilities'
 import {CartContext} from '../context'
 
-export const useAppState = () => {
+export const useCartState = () => {
   const appState = React.useContext(CartContext)
   const {cart} = appState
 

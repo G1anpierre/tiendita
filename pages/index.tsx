@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '@components/card'
 import Header from '@components/header'
-import {useAppState} from '@stateHelpers/useState'
+import {useCartState} from '@stateHelpers/useCartState'
 import {useProductsMutations} from '../context'
 import {useProductsState} from 'context/productsContext'
 import {ProductItemType} from 'types/product'
@@ -36,6 +36,28 @@ export type DataToAdd = {
   generalSize: string[]
 }
 
+// * Helper function to update data not provided by the API like quantity and price
+const updateData = (data: ProductItemType[], data2: ProductItemType[]) => {
+  const dataToAdd = {
+    quantity: 1,
+    generalSize: ['extra small', 'small', 'medium', 'large', 'extra large'],
+  }
+
+  const generalProductsUpdate = data?.map(singleData => ({
+    ...singleData,
+    ...dataToAdd,
+  }))
+  const jouleryProductsUpdate = data2?.map(singleData => ({
+    ...singleData,
+    ...dataToAdd,
+  }))
+
+  return {
+    generalProductsUpdate,
+    jouleryProductsUpdate,
+  }
+}
+
 export async function getStaticProps() {
   const res = await fetch(`https://fakestoreapi.com/products?limit=15`)
   const res2 = await fetch(
@@ -59,44 +81,15 @@ const Home: React.FC<HomeProps> = ({generalProducts, jouleryProducts}) => {
   const {allProducts, allJouleryProducts} = useProductsState()
   const {loadAllProducts, loadJouleryProducts} = useProductsMutations()
 
-  const dataToAdd = {
-    quantity: 1,
-    generalSize: ['extra small', 'small', 'medium', 'large', 'extra large'],
-  }
-
-  const updateData = (
-    data: ProductItemType[],
-    data2: ProductItemType[],
-    dataToAdd: DataToAdd,
-  ) => {
-    const generalProductsUpdate = data?.map(singleData => ({
-      ...singleData,
-      ...dataToAdd,
-    }))
-    const jouleryProductsUpdate = data2?.map(singleData => ({
-      ...singleData,
-      ...dataToAdd,
-    }))
-
-    return {
-      generalProductsUpdate,
-      jouleryProductsUpdate,
-    }
-  }
-
   const {generalProductsUpdate, jouleryProductsUpdate} = updateData(
     allProducts,
     allJouleryProducts,
-    dataToAdd,
   )
 
   React.useEffect(() => {
     loadAllProducts(generalProducts)
     loadJouleryProducts(jouleryProducts)
   }, [])
-
-  console.debug('allProducts :', generalProductsUpdate)
-  console.debug('jouleryProduct: ', jouleryProductsUpdate)
 
   return (
     <>

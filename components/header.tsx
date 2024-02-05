@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import {useAppState} from '@stateHelpers/useState'
+import {useCartState} from '@stateHelpers/useCartState'
 import DrawerContainer from '@components/drawer-container'
 import ListCartProducts from '@components/list'
 import CartEmpty from '@components/cart-empty'
@@ -10,7 +10,7 @@ import {useRouter} from 'next/router'
 
 const Header: React.FC = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
-  const {numberOfCartElements} = useAppState()
+  const {numberOfCartElements} = useCartState()
   const {data: session, status} = useSession()
   const router = useRouter()
 

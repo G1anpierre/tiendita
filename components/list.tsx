@@ -1,11 +1,11 @@
 import React from 'react'
 import {List, InputNumber, Avatar, Spin} from 'antd'
 import {ProductType} from '@pages/index'
-import {useCartMutations} from '@stateHelpers/useDispatch'
-import {useAppState} from '@stateHelpers/useState'
+import {useCartMutations} from '@stateHelpers/useCartDispatch'
+import {useCartState} from '@stateHelpers/useCartState'
 
 const ListCartProducts = () => {
-  const {cart} = useAppState()
+  const {cart} = useCartState()
   const {addQuantity} = useCartMutations()
 
   const onChange = (value: number | null, id: number) => {
