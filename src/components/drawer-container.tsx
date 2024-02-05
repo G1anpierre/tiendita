@@ -40,17 +40,16 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
         footer={
           <Space className="footer-buttons">
             <Button onClick={handleEmptyCart}>Vaciar canasta</Button>
-            <Link href="/payment/card">
-              <Button
-                type="primary"
-                onClick={handleOpenDrawer}
-                disabled={isDisable}
-              >
-                <span className="quantity-cart">{numberOfCartElements}</span>
-                <span className="go-to-payment">Ir a pagar</span>
-                <span className="total-price">{totalPrice}</span>
-              </Button>
-            </Link>
+
+            <Button
+              type="primary"
+              onClick={handleOpenDrawer}
+              disabled={isDisable}
+            >
+              <span className="quantity-cart">{numberOfCartElements}</span>
+              <span className="go-to-payment">Ir a pagar</span>
+              <span className="total-price">{totalPrice}</span>
+            </Button>
           </Space>
         }
       >

@@ -14,7 +14,6 @@ const Header: React.FC = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
   const {numberOfCartElements} = useCartState()
   const {data: session, status} = useSession()
-  const router = useRouter()
 
   const handleOpenDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen)
@@ -37,21 +36,18 @@ const Header: React.FC = () => {
               Sign In
             </div>
           )}
-          {/* {router.asPath !== '/payment/card' && (
-            <div className="cart-info" onClick={handleOpenDrawer}>
-              <span className="cart-info__icon">
-                <Image
-                  src="/images/shopping-cart.svg"
-                  alt="shopping-cart"
-                  height={20}
-                  width={20}
-                />
-              </span>
-              <span className="cart-info__quantity">
-                {numberOfCartElements}
-              </span>
-            </div>
-          )} */}
+
+          <div className="cart-info" onClick={handleOpenDrawer}>
+            <span className="cart-info__icon">
+              <Image
+                src="/images/shopping-cart.svg"
+                alt="shopping-cart"
+                height={20}
+                width={20}
+              />
+            </span>
+            <span className="cart-info__quantity">{numberOfCartElements}</span>
+          </div>
         </nav>
       </header>
       <DrawerContainer

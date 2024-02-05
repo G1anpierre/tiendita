@@ -6,6 +6,7 @@ import {useCartState} from '@stateHelpers/useCartState'
 import {useProductsMutations} from '../context'
 import {useProductsState} from 'src/context/productsContext'
 import {ProductItemType} from 'types/product'
+import {Cards} from '@components/Cards'
 
 export type HomeProps = {
   generalProductsUpdate: ProductType[]
@@ -76,90 +77,46 @@ const Home: React.FC<HomeProps> = async () => {
 
   return (
     <>
-      <div className="hero">
-        !Adquiere todos tus productos favoritos al mejor precio!
-      </div>
       <div className="main">
-        <section className="ofertas">
-          <h1 className="ofertas__title">Ofertas</h1>
-          <div className="ofertas__cards">
-            {generalProductsUpdate?.map((product: ProductType) => (
-              <Card product={product} key={product.id} />
-            ))}
+        <div className="bg-white">
+          <div className="relative bg-gray-900">
+            {/* Decorative image and overlay */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 overflow-hidden"
+            >
+              <img
+                src="https://tailwindui.com/img/ecommerce-images/home-page-01-hero-full-width.jpg"
+                alt=""
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gray-900 opacity-50"
+            />
+
+            <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 py-32 text-center sm:py-64 lg:px-0">
+              <h1 className="text-4xl font-bold tracking-tight text-white lg:text-6xl">
+                New arrivals are here
+              </h1>
+              <p className="mt-4 text-xl text-white">
+                The new arrivals have, well, newly arrived. Check out the latest
+                options from our summer small-batch release while they're still
+                in stock.
+              </p>
+              <a
+                href="#"
+                className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
+              >
+                Shop New Arrivals
+              </a>
+            </div>
           </div>
-        </section>
-        <section className="populars">
-          <h1 className="populars__title">Los mas populares</h1>
-          <div className="populars__cards">
-            {jouleryProductsUpdate?.map((product: ProductType) => (
-              <Card product={product} key={product.id} />
-            ))}
-          </div>
-        </section>
+        </div>
+        <Cards products={generalProductsUpdate} />
+        <Cards products={jouleryProductsUpdate} />
       </div>
-      {/* <style jsx>
-        {`
-          .ofertas,
-          .populars {
-            background-color: white;
-            border-radius: 16px;
-            padding: 15px;
-          }
-
-          .ofertas__cards {
-            display: grid;
-            grid-gap: 10px;
-            grid-template-columns: repeat(15, 175px);
-            overflow-x: auto;
-          }
-          .populars__cards {
-            display: grid;
-            grid-gap: 10px;
-            grid-template-columns: repeat(
-              ${jouleryProductsUpdate?.length},
-              175px
-            );
-            overflow-x: auto;
-          }
-
-          .hero {
-            background-image: url('./images/banner-desktop.svg');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 250px;
-            border-radius: 16px;
-            color: white;
-            display: flex;
-            justify-content: center;
-            text-align: center;
-            align-items: center;
-            font: normal 600 14px/24px Poppins;
-            margin-bottom: 15px;
-          }
-
-          .card {
-            display: grid;
-          }
-
-          @media screen and (min-width: 768px) {
-            .ofertas,
-            .populars {
-              margin-bottom: 40px;
-              box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-            }
-            .ofertas__cards,
-            .populars__cards {
-              grid-gap: 48px;
-            }
-
-            .hero {
-              font: normal 600 28px/42px Poppins;
-              margin-bottom: 40px;
-            }
-          }
-        `}
-      </style> */}
     </>
   )
 }
