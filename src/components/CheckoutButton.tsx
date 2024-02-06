@@ -20,7 +20,6 @@ export const CheckoutButton = () => {
         <span className="go-to-payment">Ir a pagar</span>
         <span className="total-price">{totalPrice}</span>
       </button>
-      //{' '}
     </form>
   )
 }
