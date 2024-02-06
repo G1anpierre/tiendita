@@ -1,8 +1,9 @@
 'use server'
 import {redirect} from 'next/navigation'
 import Stripe from 'stripe'
+import {STRIPE_SECRET_KEY} from './config'
 
-const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!, {
+const stripe = new Stripe(STRIPE_SECRET_KEY!, {
   apiVersion: '2023-10-16',
 })
 const getActiveProducts = async () => {
