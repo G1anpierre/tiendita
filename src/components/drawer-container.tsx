@@ -16,7 +16,7 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
   drawerIsOpen,
   handleOpenDrawer,
 }) => {
-  const {isDisable, cart} = useCartState()
+  const {isDisable} = useCartState()
   const {emptyCart} = useCartMutations()
 
   const handleEmptyCart = () => {

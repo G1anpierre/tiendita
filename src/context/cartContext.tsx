@@ -1,6 +1,7 @@
-import React, {useReducer} from 'react'
+'use client'
+import React, {useEffect, useReducer} from 'react'
 import {cartReducer, ActionType} from '../reducer'
-import {initialState} from '../../state'
+import {initialState, initializer} from '../../state'
 
 export type InitialStateType = {
   cart: []
@@ -15,7 +16,11 @@ export const CartDispatchContext = React.createContext(
 
 export const CartStateProvider = ({children}: {children: React.ReactNode}) => {
   //@ts-ignore
-  const [state, dispatch] = useReducer(cartReducer, initialState)
+  const [state, dispatch] = useReducer(cartReducer, initializer())
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(state))
+  }, [state])
 
   return (
     <>
