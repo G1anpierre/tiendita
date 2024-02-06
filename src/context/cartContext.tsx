@@ -19,7 +19,7 @@ export const CartStateProvider = ({children}: {children: React.ReactNode}) => {
   const [state, dispatch] = useReducer(cartReducer, initializer())
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(state))
+    localStorage?.setItem('cart', JSON.stringify(state))
   }, [state])
 
   return (

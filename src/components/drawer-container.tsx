@@ -21,7 +21,9 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
 
   const handleEmptyCart = () => {
     emptyCart()
-    localStorage.removeItem('cart')
+    if (typeof window !== 'undefined') {
+      localStorage?.removeItem('cart')
+    }
   }
 
   return (

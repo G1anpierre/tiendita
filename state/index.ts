@@ -3,9 +3,12 @@ const initialState = {
 }
 
 export const initializer = (initialValue = initialState) => {
-  return JSON.parse(
-    localStorage?.getItem('cart') || JSON.stringify(initialValue),
-  )
+  if (typeof window !== 'undefined') {
+    return JSON.parse(
+      localStorage?.getItem('cart') || JSON.stringify(initialValue),
+    )
+  }
+  return initialValue
 }
 
 const productsInitialState = {
