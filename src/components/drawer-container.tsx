@@ -1,8 +1,9 @@
+'use client'
 import React from 'react'
 import {Drawer, Button, Space} from 'antd'
 import {useCartMutations} from '@stateHelpers/useCartDispatch'
 import {useCartState} from '@stateHelpers/useCartState'
-import Link from 'next/link'
+import {CheckoutButton} from './CheckoutButton'
 
 export type DrawerContainerProps = {
   children: React.ReactNode
@@ -15,14 +16,12 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
   drawerIsOpen,
   handleOpenDrawer,
 }) => {
-  const {numberOfCartElements, totalPrice, isDisable, cart} = useCartState()
+  const {isDisable, cart} = useCartState()
   const {emptyCart} = useCartMutations()
 
   const handleEmptyCart = () => {
     emptyCart()
   }
-
-  console.log('cart :', cart)
 
   return (
     <>
@@ -30,7 +29,7 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
         title="Mexico City Marriott Reforma Hotel"
         placement="right"
         onClose={handleOpenDrawer}
-        visible={drawerIsOpen}
+        open={drawerIsOpen}
         size="large"
         extra={
           <Space>
@@ -40,16 +39,7 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
         footer={
           <Space className="footer-buttons">
             <Button onClick={handleEmptyCart}>Vaciar canasta</Button>
-
-            <Button
-              type="primary"
-              onClick={handleOpenDrawer}
-              disabled={isDisable}
-            >
-              <span className="quantity-cart">{numberOfCartElements}</span>
-              <span className="go-to-payment">Ir a pagar</span>
-              <span className="total-price">{totalPrice}</span>
-            </Button>
+            <CheckoutButton />
           </Space>
         }
       >

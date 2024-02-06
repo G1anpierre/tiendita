@@ -1,17 +1,7 @@
 // 'use client'
 import React from 'react'
-import Card from 'src/components/card'
-import Header from 'src/components/header'
-import {useCartState} from '@stateHelpers/useCartState'
-import {useProductsMutations} from '../context'
-import {useProductsState} from 'src/context/productsContext'
 import {ProductItemType} from 'types/product'
 import {Cards} from '@components/Cards'
-
-export type HomeProps = {
-  generalProductsUpdate: ProductType[]
-  jouleryProductsUpdate: ProductType[]
-}
 
 export type DataToAdd = {
   quantity: number
@@ -40,7 +30,7 @@ const updateData = (data: ProductItemType[], data2: ProductItemType[]) => {
   }
 }
 
-export async function getProducts() {
+const getProducts = async () => {
   const res = await fetch(`https://fakestoreapi.com/products?limit=15`)
   const res2 = await fetch(
     `https://fakestoreapi.com/products/category/jewelery`,
@@ -65,7 +55,7 @@ export async function getProducts() {
   }
 }
 
-const Home: React.FC<HomeProps> = async () => {
+const Home = async () => {
   const {generalProductsUpdate, jouleryProductsUpdate} = await getProducts()
 
   // const {loadAllProducts, loadJouleryProducts} = useProductsMutations()

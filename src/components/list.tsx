@@ -1,6 +1,5 @@
 import React from 'react'
 import {List, InputNumber, Avatar, Spin} from 'antd'
-import {ProductType} from 'src/pages/index'
 import {useCartMutations} from '@stateHelpers/useCartDispatch'
 import {useCartState} from '@stateHelpers/useCartState'
 

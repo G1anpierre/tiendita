@@ -45,7 +45,9 @@ export const SingleCard = ({product}: {product: ProductType}) => {
         <button
           type="button"
           className="relative flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200"
-          onClick={() => addProduct(product)}
+          onClick={() =>
+            !isfoundElement(product.id) ? addProduct(product) : null
+          }
         >
           Add to bag
           <span className="sr-only">, {product.title}</span>

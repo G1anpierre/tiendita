@@ -1,6 +1,6 @@
 'use client'
 import Script from 'next/script'
-import {NEXT_PUBLIC_GTM_ID} from 'config'
+import {NEXT_PUBLIC_GTM_ID} from 'src/config'
 // import {useRouter} from 'next/router'
 import React, {useEffect} from 'react'
 import ThemeWrapper from 'src/components/ThemeWrapper'
