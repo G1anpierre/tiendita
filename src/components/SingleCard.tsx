@@ -4,8 +4,8 @@ import {useCartMutations} from '@stateHelpers/useCartDispatch'
 import {useCartState} from '@stateHelpers/useCartState'
 
 export const SingleCard = ({product}: {product: ProductType}) => {
-  const {addProduct, addQuantity} = useCartMutations()
-  const {isfoundElement, specificProduct} = useCartState()
+  const {addProduct} = useCartMutations()
+  const {isfoundElement} = useCartState()
 
   const [visible, setVisible] = useState(false)
 
@@ -44,12 +44,12 @@ export const SingleCard = ({product}: {product: ProductType}) => {
       <div className="mt-6">
         <button
           type="button"
-          className="relative flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200"
+          className="relative w-full flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200"
           onClick={() =>
             !isfoundElement(product.id) ? addProduct(product) : null
           }
         >
-          Add to bag
+          {isfoundElement(product.id) ? 'Added' : 'Add to cart'}
           <span className="sr-only">, {product.title}</span>
         </button>
       </div>

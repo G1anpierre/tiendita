@@ -1,7 +1,6 @@
 'use client'
 import React from 'react'
 import {useCartState} from '@stateHelpers/useCartState'
-// import {createCheckout} from 'src/app/utils/api'
 import {checkoutStripe} from 'src/actions'
 
 export const CheckoutButton = () => {
@@ -11,11 +10,7 @@ export const CheckoutButton = () => {
 
   return (
     <form action={checkoutStripeWithCart}>
-      <button
-        type="submit"
-        disabled={isDisable}
-        // onClick={() => createCheckout(cart)}
-      >
+      <button type="submit" disabled={isDisable}>
         <span className="quantity-cart">{numberOfCartElements}</span>
         <span className="go-to-payment">Ir a pagar</span>
         <span className="total-price">{totalPrice}</span>
