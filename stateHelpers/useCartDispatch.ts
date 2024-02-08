@@ -16,7 +16,7 @@ export const useCartMutations = () => {
       type: EMPTY_CART,
     })
 
-  const addQuantity = (productInfo: any) =>
+  const addQuantity = (productInfo: {id: number; value: number}) =>
     dispatch({
       type: ADD_QUANTITY,
       productInfo,

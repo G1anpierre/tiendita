@@ -4,7 +4,7 @@ import {cartReducer, ActionType} from '../reducer'
 import {initialState, initializer} from '../../state'
 
 export type InitialStateType = {
-  cart: []
+  cart: ProductType[]
 }
 
 const defaultState = {} as InitialStateType

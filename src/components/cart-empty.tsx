@@ -1,16 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
-import Button from 'src/components/button'
 
-type CartEmptyProps = {
-  handleOpenDrawer: () => void
-}
+import {DrawerClose} from './ui/drawer'
+import {Button} from './ui/button'
 
-const CartEmpty: React.FC<CartEmptyProps> = ({handleOpenDrawer}) => {
-  const handleCloseDrawer = () => {
-    handleOpenDrawer()
-  }
-
+const CartEmpty = () => {
   return (
     <>
       <div className="container-empty-box">
@@ -27,9 +21,12 @@ const CartEmpty: React.FC<CartEmptyProps> = ({handleOpenDrawer}) => {
           </div>
           <h1 className="message-empty-box-title">Tu canasta esta vacia</h1>
           {/* <button>Agregar productos</button> */}
-          <Button callback={() => handleCloseDrawer()}>
+          {/* <Button callback={() => handleCloseDrawer()}>
             Agregar productos
-          </Button>
+          </Button> */}
+          <DrawerClose asChild>
+            <Button variant="outline">Close</Button>
+          </DrawerClose>
         </div>
       </div>
       <style jsx>{`

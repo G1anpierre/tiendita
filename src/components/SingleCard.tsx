@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 import {useCartMutations} from '@stateHelpers/useCartDispatch'
 import {useCartState} from '@stateHelpers/useCartState'
-import {Button} from './@/components/ui/button'
+import {Button} from './ui/button'
 
 export const SingleCard = ({product}: {product: ProductType}) => {
   const {addProduct} = useCartMutations()

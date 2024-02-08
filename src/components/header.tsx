@@ -9,6 +9,8 @@ import ListCartProducts from 'src/components/list'
 import CartEmpty from 'src/components/cart-empty'
 import {useSession, signIn, signOut} from 'next-auth/react'
 import {useRouter} from 'next/navigation'
+import {DrawerDemo} from './Drawer'
+import {Drawer} from 'antd'
 
 const Header: React.FC = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
@@ -36,21 +38,10 @@ const Header: React.FC = () => {
               Sign In
             </div>
           )}
-
-          <div className="cart-info" onClick={handleOpenDrawer}>
-            <span className="cart-info__icon">
-              <Image
-                src="/images/shopping-cart.svg"
-                alt="shopping-cart"
-                height={20}
-                width={20}
-              />
-            </span>
-            <span className="cart-info__quantity">{numberOfCartElements}</span>
-          </div>
+          <DrawerDemo />
         </nav>
       </header>
-      <DrawerContainer
+      {/* <DrawerContainer
         drawerIsOpen={drawerIsOpen}
         handleOpenDrawer={handleOpenDrawer}
       >
@@ -59,7 +50,8 @@ const Header: React.FC = () => {
         ) : (
           <CartEmpty handleOpenDrawer={handleOpenDrawer} />
         )}
-      </DrawerContainer>
+      </DrawerContainer> */}
+      {/* <DrawerDemo /> */}
       <style jsx>{`
         .navbar {
           display: grid;

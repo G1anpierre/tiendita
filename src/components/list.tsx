@@ -7,7 +7,7 @@ const ListCartProducts = () => {
   const {cart} = useCartState()
   const {addQuantity} = useCartMutations()
 
-  const onChange = (value: number | null, id: number) => {
+  const onChange = (value: number, id: number) => {
     addQuantity({value, id})
   }
 
@@ -30,7 +30,7 @@ const ListCartProducts = () => {
                 max={100000}
                 value={item.quantity}
                 defaultValue={1}
-                onChange={value => onChange(value, item.id)}
+                onChange={value => onChange(Number(value), item.id)}
               />
             </div>
           </List.Item>
