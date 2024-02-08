@@ -2,6 +2,7 @@
 import React, {useState} from 'react'
 import {useCartMutations} from '@stateHelpers/useCartDispatch'
 import {useCartState} from '@stateHelpers/useCartState'
+import {Button} from './@/components/ui/button'
 
 export const SingleCard = ({product}: {product: ProductType}) => {
   const {addProduct} = useCartMutations()
@@ -42,16 +43,16 @@ export const SingleCard = ({product}: {product: ProductType}) => {
         </div>
       </div>
       <div className="mt-6">
-        <button
+        <Button
           type="button"
-          className="relative w-full flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200"
           onClick={() =>
             !isfoundElement(product.id) ? addProduct(product) : null
           }
+          className="w-full"
         >
           {isfoundElement(product.id) ? 'Added' : 'Add to cart'}
           <span className="sr-only">, {product.title}</span>
-        </button>
+        </Button>
       </div>
     </div>
   )

@@ -2,6 +2,7 @@
 import React from 'react'
 import {useCartState} from '@stateHelpers/useCartState'
 import {checkoutStripe} from 'src/actions'
+import {Button} from '@components/@/components/ui/button'
 
 export const CheckoutButton = () => {
   const {numberOfCartElements, totalPrice, isDisable, cart} = useCartState()
@@ -10,11 +11,11 @@ export const CheckoutButton = () => {
 
   return (
     <form action={checkoutStripeWithCart}>
-      <button type="submit" disabled={isDisable}>
+      <Button type="submit" disabled={isDisable}>
         <span className="quantity-cart">{numberOfCartElements}</span>
         <span className="go-to-payment">Ir a pagar</span>
         <span className="total-price">{totalPrice}</span>
-      </button>
+      </Button>
     </form>
   )
 }
