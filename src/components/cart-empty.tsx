@@ -7,9 +7,9 @@ import {Button} from './ui/button'
 const CartEmpty = () => {
   return (
     <>
-      <div className="container-empty-box">
-        <div className="message-empty-box">
-          <div className="message-empty-box-container-image">
+      <div className="flex justify-center items-center h-full">
+        <div className="flex flex-col gap-3">
+          <div>
             <Image
               src="/images/family-values-shopping.svg"
               alt="shopping-cart"
@@ -19,30 +19,12 @@ const CartEmpty = () => {
               className="empty-box-image"
             />
           </div>
-          <h1 className="message-empty-box-title">Tu canasta esta vacia</h1>
-          {/* <button>Agregar productos</button> */}
-          {/* <Button callback={() => handleCloseDrawer()}>
-            Agregar productos
-          </Button> */}
+          <h1 className="text-center">Your Cart is Empty</h1>
           <DrawerClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outline"> Add Products </Button>
           </DrawerClose>
         </div>
       </div>
-      <style jsx>{`
-        .container-empty-box {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100%;
-        }
-
-        .message-empty-box {
-          display: grid;
-          grid-template-columns: auto;
-          grid-template-rows: 1fr 0.35fr auto;
-        }
-      `}</style>
     </>
   )
 }
