@@ -2,7 +2,7 @@ import React from 'react'
 import {useCartMutations} from '@stateHelpers/useCartDispatch'
 
 export const CartProduct = ({product}: {product: ProductType}) => {
-  const {addQuantity} = useCartMutations()
+  const {addQuantity, removeProduct} = useCartMutations()
 
   return (
     <li className="flex py-6 sm:py-10">
@@ -68,7 +68,8 @@ export const CartProduct = ({product}: {product: ProductType}) => {
 
             <button
               type="button"
-              className="ml-4 text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:ml-0 sm:mt-3"
+              className="ml-4 text-sm font-medium sm:ml-0 sm:mt-3 text-red-500"
+              onClick={() => removeProduct(product.id)}
             >
               <span>Remove</span>
             </button>
