@@ -1,12 +1,13 @@
 'use client'
 import Script from 'next/script'
-import {NEXT_PUBLIC_GTM_ID} from 'src/config'
+
 // import {useRouter} from 'next/router'
 import React from 'react'
 import {SessionProvider} from 'next-auth/react'
 import {CartStateProvider, ProductsProvider} from './context'
 
 import {pageview} from './lib/gtm'
+import {NEXT_PUBLIC_GTM_ID} from './config'
 
 const tagManagerArgs = {
   gtmId: NEXT_PUBLIC_GTM_ID as string,

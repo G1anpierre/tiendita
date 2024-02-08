@@ -1,6 +1,7 @@
 import React from 'react'
-import {useCartState} from '@stateHelpers/useCartState'
+
 import {CartProduct} from './CartProduct'
+import {useCartState} from '../../stateHelpers/useCartState'
 
 export const CartProducsList = () => {
   const {cart} = useCartState()

@@ -1,7 +1,6 @@
 // 'use client'
+import {Cards} from '@/components/Cards'
 import React from 'react'
-import {ProductItemType} from 'types/product'
-import {Cards} from '@components/Cards'
 
 export type DataToAdd = {
   quantity: number

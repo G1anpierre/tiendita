@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
-import {useCartState} from '@stateHelpers/useCartState'
-import {checkoutStripe} from 'src/actions'
-import {Button} from '@components/ui/button'
+import {useCartState} from '../../stateHelpers/useCartState'
+import {checkoutStripe} from '@/actions'
+import {Button} from './ui/button'
 
 export const CheckoutButton = () => {
   const {isDisable, cart} = useCartState()

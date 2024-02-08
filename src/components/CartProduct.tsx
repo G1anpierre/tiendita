@@ -1,6 +1,7 @@
 import React from 'react'
-import {useCartMutations} from '@stateHelpers/useCartDispatch'
+
 import Link from 'next/link'
+import {useCartMutations} from '../../stateHelpers/useCartDispatch'
 
 export const CartProduct = ({product}: {product: ProductType}) => {
   const {addQuantity, removeProduct} = useCartMutations()

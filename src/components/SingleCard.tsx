@@ -1,8 +1,8 @@
 'use client'
 import React, {useState} from 'react'
-import {useCartMutations} from '@stateHelpers/useCartDispatch'
-import {useCartState} from '@stateHelpers/useCartState'
 import {Button} from './ui/button'
+import {useCartMutations} from '../../stateHelpers/useCartDispatch'
+import {useCartState} from '../../stateHelpers/useCartState'
 
 export const SingleCard = ({product}: {product: ProductType}) => {
   const {addProduct} = useCartMutations()

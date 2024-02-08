@@ -1,8 +1,8 @@
-import {useCartState} from '@stateHelpers/useCartState'
 import React from 'react'
 import {CheckoutButton} from './CheckoutButton'
 import {Button} from './ui/button'
 import {DrawerClose} from './ui/drawer'
+import {useCartState} from '../../stateHelpers/useCartState'
 
 export const CheckoutSection = () => {
   const {totalPrice} = useCartState()

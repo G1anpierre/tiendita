@@ -1,6 +1,5 @@
 import * as React from 'react'
 import Image from 'next/image'
-import {useCartState} from '@stateHelpers/useCartState'
 
 import {
   Drawer,
@@ -16,7 +15,8 @@ import {CartEmpty} from './Cart-empty'
 import {CartProducsList} from './CartProducsList'
 import {ScrollArea} from './ui/scroll-area'
 import {CheckoutSection} from './CheckoutSection'
-import {useCartMutations} from '@stateHelpers/useCartDispatch'
+import {useCartMutations} from '../../stateHelpers/useCartDispatch'
+import {useCartState} from '../../stateHelpers/useCartState'
 
 export function DrawerDemo() {
   const {numberOfCartElements} = useCartState()
