@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {useSession, signIn, signOut} from 'next-auth/react'
 import {DrawerDemo} from './Drawer'
 
-const Header: React.FC = () => {
+export const Header = () => {
   const {data: session, status} = useSession()
 
   return (
@@ -43,5 +43,3 @@ const Header: React.FC = () => {
     </>
   )
 }
-
-export default Header
