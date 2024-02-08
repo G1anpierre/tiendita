@@ -12,7 +12,7 @@ import {
   DrawerTrigger,
 } from './ui/drawer'
 import {Button} from './ui/button'
-import CartEmpty from './cart-empty'
+import {CartEmpty} from './Cart-empty'
 import {CartProducsList} from './CartProducsList'
 import {ScrollArea} from './ui/scroll-area'
 import {CheckoutSection} from './CheckoutSection'
@@ -39,9 +39,9 @@ export function DrawerDemo() {
           </div>
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="h-screen top-0 right-0 left-auto mt-0 w-[500px] rounded-none">
+      <DrawerContent className="h-screen top-0 right-0 left-auto mt-0 max-w-full rounded-none">
         <div className="mx-auto w-full h-full grid grid-cols-1 grid-rows-[50px_minmax(0px,_1fr)_auto]">
-          <DrawerHeader className="flex justify-between align-center row-start-1 row-end-2">
+          <DrawerHeader className="flex items-center justify-between  row-start-1 row-end-2">
             <DrawerTitle>Mexico City Marriott Reforma Hotel</DrawerTitle>
             {numberOfCartElements ? (
               <Button

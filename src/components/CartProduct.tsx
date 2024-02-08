@@ -1,5 +1,6 @@
 import React from 'react'
 import {useCartMutations} from '@stateHelpers/useCartDispatch'
+import Link from 'next/link'
 
 export const CartProduct = ({product}: {product: ProductType}) => {
   const {addQuantity, removeProduct} = useCartMutations()
@@ -19,12 +20,12 @@ export const CartProduct = ({product}: {product: ProductType}) => {
           <div className="flex justify-between sm:grid sm:grid-cols-2">
             <div className="pr-6">
               <h3 className="text-sm">
-                <a
+                <Link
                   href={`${product.id}`}
                   className="font-medium text-gray-700 hover:text-gray-800"
                 >
                   {product.title}
-                </a>
+                </Link>
               </h3>
               {/* {product.color ? (
               <p className="mt-1 text-sm text-gray-500">

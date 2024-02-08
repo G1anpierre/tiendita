@@ -4,7 +4,7 @@ import Image from 'next/image'
 import {DrawerClose} from './ui/drawer'
 import {Button} from './ui/button'
 
-const CartEmpty = () => {
+export const CartEmpty = () => {
   return (
     <>
       <div className="flex justify-center items-center h-full">
@@ -28,5 +28,3 @@ const CartEmpty = () => {
     </>
   )
 }
-
-export default CartEmpty

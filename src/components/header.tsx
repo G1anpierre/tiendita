@@ -1,143 +1,45 @@
 'use client'
 
-import React, {useState} from 'react'
-import Image from 'next/image'
+import React from 'react'
 import Link from 'next/link'
-import {useCartState} from '@stateHelpers/useCartState'
-import DrawerContainer from 'src/components/drawer-container'
-import ListCartProducts from 'src/components/list'
-import CartEmpty from 'src/components/cart-empty'
 import {useSession, signIn, signOut} from 'next-auth/react'
-import {useRouter} from 'next/navigation'
 import {DrawerDemo} from './Drawer'
-import {Drawer} from 'antd'
 
 const Header: React.FC = () => {
-  const [drawerIsOpen, setDrawerIsOpen] = useState(false)
-  const {numberOfCartElements} = useCartState()
   const {data: session, status} = useSession()
-
-  const handleOpenDrawer = () => {
-    setDrawerIsOpen(!drawerIsOpen)
-  }
 
   return (
     <>
       <header className="header">
-        <nav className="navbar">
+        <nav className="grid grid-cols-[1fr_1fr_auto] grid-row-2 p-4 items-center gap-2 sm:grid-cols-[1fr_auto_auto_auto]">
           <Link href="/">
-            <div className="logo">Tiendita</div>
+            <div className="col-start-1 text-orange-600 italic font-bold text-3xl">
+              Tiendita
+            </div>
           </Link>
-          <div className="place">Mexico City Reforma</div>
+          <div className="row-start-2 col-span-3 justify-self-center hover:pointer sm:col-start-2 sm:row-start-1 sm:justify-self-end sm:col-span-1">
+            Mexico City Reforma
+          </div>
           {session ? (
-            <div className="user login" onClick={() => signOut()}>
+            <div
+              className="col-start-2 justify-self-end"
+              onClick={() => signOut()}
+            >
               {session?.user?.name}, Sign Out
             </div>
           ) : (
-            <div className="user" onClick={() => signIn()}>
+            <div
+              className="col-start-2 sm:col-start-3 justify-self-end"
+              onClick={() => signIn()}
+            >
               Sign In
             </div>
           )}
-          <DrawerDemo />
+          <div className="col-start-3 sm:col-start-4">
+            <DrawerDemo />
+          </div>
         </nav>
       </header>
-      {/* <DrawerContainer
-        drawerIsOpen={drawerIsOpen}
-        handleOpenDrawer={handleOpenDrawer}
-      >
-        {numberOfCartElements ? (
-          <ListCartProducts />
-        ) : (
-          <CartEmpty handleOpenDrawer={handleOpenDrawer} />
-        )}
-      </DrawerContainer> */}
-      {/* <DrawerDemo /> */}
-      <style jsx>{`
-        .navbar {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: auto;
-          grid-template-areas: 'logo user cart-info' 'place place place';
-          align-items: center;
-          padding: 15px 0;
-        }
-
-        .logo {
-          grid-area: logo;
-          font: italic 900 22px/16px Inter;
-          color: var(--tomato);
-          cursor: pointer;
-        }
-
-        .place {
-          grid-area: place;
-          justify-self: center;
-          cursor: pointer;
-        }
-
-        .cart-info {
-          grid-area: cart-info;
-          justify-self: end;
-          padding: 8px 25px;
-          background-color: var(--green);
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-        }
-
-        .cart-info__quantity {
-          margin-left: 8px;
-        }
-
-        .user {
-          grid-area: user;
-          justify-self: end;
-          padding-right: 10px;
-          margin-right: 10px;
-          border-right: 1px solid black;
-          cursor: pointer;
-        }
-
-        .hero {
-          background-image: url('./images/banner-desktop.svg');
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: cover;
-          height: 250px;
-          border-radius: 16px;
-          color: white;
-          display: flex;
-          justify-content: center;
-          text-align: center;
-          align-items: center;
-          font: normal 600 14px/24px Poppins;
-          margin-bottom: 15px;
-        }
-
-        @media screen and (min-width: 768px) {
-          .navbar {
-            grid-template-areas: 'logo user place cart-info';
-            grid-auto-flow: column;
-            grid-column-gap: 10px;
-            padding: 30px 0;
-            margin-bottom: 30px;
-          }
-
-          .user {
-            margin-right: 0px;
-          }
-
-          .place {
-            justify-self: end;
-            margin-right: 10px;
-          }
-
-          .cart-info {
-            margin-left: 10px;
-          }
-        }
-      `}</style>
     </>
   )
 }

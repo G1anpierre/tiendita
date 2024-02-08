@@ -1,5 +1,4 @@
 import React, {Dispatch, useReducer} from 'react'
-import {productsInitialState} from '../../state'
 
 export type InitialProductsStateType = {
   products: ProductItemType[]

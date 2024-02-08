@@ -2,11 +2,10 @@
 import Script from 'next/script'
 import {NEXT_PUBLIC_GTM_ID} from 'src/config'
 // import {useRouter} from 'next/router'
-import React, {useEffect} from 'react'
-import ThemeWrapper from 'src/components/ThemeWrapper'
+import React from 'react'
 import {SessionProvider} from 'next-auth/react'
 import {CartStateProvider, ProductsProvider} from './context'
-import Layout from 'src/components/layout'
+import Layout from '@components/Layout'
 import {pageview} from './lib/gtm'
 
 const tagManagerArgs = {
@@ -35,15 +34,14 @@ export const Providers = ({children}: {children: React.ReactNode}) => {
       `,
         }}
       />
-      <ThemeWrapper>
-        <SessionProvider>
-          <ProductsProvider>
-            <CartStateProvider>
-              <Layout>{children}</Layout>
-            </CartStateProvider>
-          </ProductsProvider>
-        </SessionProvider>
-      </ThemeWrapper>
+
+      <SessionProvider>
+        <ProductsProvider>
+          <CartStateProvider>
+            <Layout>{children}</Layout>
+          </CartStateProvider>
+        </ProductsProvider>
+      </SessionProvider>
     </>
   )
 }
