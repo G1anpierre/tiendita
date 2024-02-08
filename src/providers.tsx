@@ -7,7 +7,6 @@ import {SessionProvider} from 'next-auth/react'
 import {CartStateProvider, ProductsProvider} from './context'
 
 import {pageview} from './lib/gtm'
-import {AppLayout} from '@components/Layout'
 
 const tagManagerArgs = {
   gtmId: NEXT_PUBLIC_GTM_ID as string,
@@ -38,9 +37,7 @@ export const Providers = ({children}: {children: React.ReactNode}) => {
 
       <SessionProvider>
         <ProductsProvider>
-          <CartStateProvider>
-            <AppLayout>{children}</AppLayout>
-          </CartStateProvider>
+          <CartStateProvider>{children}</CartStateProvider>
         </ProductsProvider>
       </SessionProvider>
     </>
