@@ -1,15 +1,15 @@
 'use client'
 
-import React, {useEffect} from 'react'
+import React from 'react'
 import Header from '@components/Header'
 import Link from 'next/link'
 import {useRouter} from 'next/navigation'
 
-type LayoutProps = {
+type AppLayoutProps = {
   children: React.ReactNode
 }
 
-const Layout: React.FC<LayoutProps> = ({children}) => {
+export const AppLayout: React.FC<AppLayoutProps> = ({children}) => {
   const router = useRouter()
 
   return (
@@ -26,5 +26,3 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
     </>
   )
 }
-
-export default Layout
