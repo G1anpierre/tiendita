@@ -1,6 +1,11 @@
 import React from 'react'
 import {CartDispatchContext} from '../src/context'
-import {ADD_PRODUCT, EMPTY_CART, ADD_QUANTITY} from './stateVariables'
+import {
+  ADD_PRODUCT,
+  EMPTY_CART,
+  ADD_QUANTITY,
+  REMOVE_PRODUCT,
+} from './stateVariables'
 
 export const useCartMutations = () => {
   const dispatch = React.useContext(CartDispatchContext)
@@ -16,14 +21,22 @@ export const useCartMutations = () => {
       type: EMPTY_CART,
     })
 
-  const addQuantity = (productInfo: any) =>
+  const addQuantity = (productInfo: {id: number; value: number}) =>
     dispatch({
       type: ADD_QUANTITY,
       productInfo,
     })
+
+  const removeProduct = (id: number) => {
+    dispatch({
+      type: REMOVE_PRODUCT,
+      id,
+    })
+  }
   return {
     addProduct,
     emptyCart,
     addQuantity,
+    removeProduct,
   }
 }
