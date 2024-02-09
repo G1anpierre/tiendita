@@ -1,5 +1,6 @@
 // 'use client'
 import {Cards} from '@/components/Cards'
+import Link from 'next/link'
 import React from 'react'
 
 export type DataToAdd = {
@@ -94,12 +95,12 @@ const Home = async () => {
                 options from our summer small-batch release while they're still
                 in stock.
               </p>
-              <a
+              <Link
                 href="#"
                 className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
               >
                 Shop New Arrivals
-              </a>
+              </Link>
             </div>
           </div>
         </div>
